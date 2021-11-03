@@ -17,7 +17,6 @@
     }
 
     body {
-      min-height: 100vh;
       height: 100%;
       font-size: .875rem;
     }
@@ -25,25 +24,23 @@
     main {
       display: flex;
       flex-wrap: nowrap;
-      height: 100vh;
-      height: -webkit-fill-available;
-      max-height: 100vh;
       overflow-x: auto;
       overflow-y: hidden;
     }
+
     /*
     * Sidebar
     */
-
     .sidebar {
       position: fixed;
       top: 0;
-      /* rtl:raw:
+
       right: 0;
-      */
+
       bottom: 0;
-      /* rtl:remove */
-      left: 0;
+      /* left:0;
+      rtl:remove */
+
       z-index: 100; /* Behind the navbar */
       padding: 48px 0 0; /* Height of navbar */
       box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
@@ -54,33 +51,9 @@
         top: 0rem;
       }
     }
-
-    .principal {
-      padding-left:280px;
-    }
-
-    @media (max-width: 767.98px) {
-      .principal {
-        padding:0px;
-      }
-    }
-    .sidebar-sticky {
-      position: relative;
-      top: 0;
-      height: calc(100vh - 48px);
-      padding-top: .5rem;
-      overflow-x: hidden;
-      overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    }
-
     .sidebar .nav-link {
       font-weight: 500;
       color: #fff;
-    }
-
-    .sidebar-heading {
-      font-size: .75rem;
-      text-transform: uppercase;
     }
 
     /*
@@ -123,11 +96,11 @@
       <i class="bi bi-clouds px-2" style="font-size: 2rem;"></i>
       <span class="fs-4">OS Web</span>
     </a>
-    
-    <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
+
     <div class="navbar-nav">
       <div class="nav-item ">
         <a class="nav-link px-3" href="#">Matheus</a>
@@ -138,8 +111,8 @@
 
   <main>
     <!-- <div id="sidebarMenu" class="d-flex flex-column flex-shrink-0 p-3 text-white sidebar bg-dark collapse show" > -->
-    <div id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block pt-5 bg-dark sidebar collapse" style="width: 280px;">
-    <!-- gostei --> 
+    <div id="sidebarMenu" class="col-md-3 col-lg-2 pt-5 bg-dark sidebar collapse" style="width: 280px;">
+    <!-- gostei -->
     <!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">  -->
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
@@ -182,7 +155,7 @@
       </div>
     </div>
 
-    
+
     <div class="container principal ">
       <div class="row m-1">
         @yield('sub-nav')
@@ -192,6 +165,60 @@
   </main>
 
   <script src="{{ url('js/app.js') }}"></script>
+  <script>
+    new gridjs.Grid({
+      columns: [
+        {
+          name: 'Id',
+          sort: {
+            enabled: true
+          }
+        },
+        {
+          name: 'Brand',
+          sort: {
+            enabled: true
+          }
+        },
+        {
+          name: 'Nome',
+          sort: {
+            enabled: true
+          }
+        },
+        {
+          name: 'Preço',
+          sort: {
+            enabled: true
+          }
+        }],
+        server: {
+          method: "GET",
+          url: 'https://makeup-api.herokuapp.com/api/v1/products.json',
+          then: data => data.map(produto =>
+            [produto.id, produto.brand, produto.name, produto.price]
+          )
+        },
+      pagination: {
+        limit: 15,
+      },
+      search: {
+        enabled: true
+      },
+      data: [
+        ["John", "john@example.com", "(353) 01 222 3333"],
+        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
+        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
+        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
+        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
+        ["John", "john@example.com", "(353) 01 222 3333"],
+        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
+        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
+        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
+        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
+      ]
+    }).render(document.getElementById("wrapper"));
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 </body>
 

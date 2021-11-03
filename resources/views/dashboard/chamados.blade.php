@@ -22,11 +22,11 @@
             </div>
           </div>
         </div>
-        
+
       </header>
 @endsection
 
-@section('content')    
+@section('content')
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Chamados</h1>
       </div>
@@ -38,43 +38,62 @@
               Filtro
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              
+              <form class="row g-3">
+                <div class="row ps-0">
+                  <div class="col-md-3">
+                    <label for="inputEmail4" class="form-label">Código</label>
+                    <input type="number" class="form-control form-control-sm" id="inputEmail4">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="inputAddress" class="form-label">Data Inicial</label>
+                  <input type="date" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="col-6">
+                  <label for="inputAddress2" class="form-label">Data Final</label>
+                  <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">Status</label>
+                  <select id="inputState" class="form-select form-select-sm">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Empresa</label>
+                  <select id="inputState" class="form-select form-select-sm">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Produto</label>
+                  <select id="inputState" class="form-select form-select-sm">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Assunto</label>
+                  <select id="inputState" class="form-select form-select-sm">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
 
-      <table class="table table-striped table-hover m-3">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="wrapper"></div>
 @endsection
 
 
