@@ -41,47 +41,54 @@
           <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <form class="row g-3">
-                <div class="row ps-0">
-                  <div class="col-md-3">
+
+                <div class="row col-12 pt-2">
+                  <div class="col-sm-12 col-md-12">
                     <label for="inputEmail4" class="form-label">Código</label>
                     <input type="number" class="form-control form-control-sm" id="inputEmail4">
                   </div>
                 </div>
-                <div class="col-6">
-                  <label for="inputAddress" class="form-label">Data Inicial</label>
-                  <input type="date" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
+                <div class="row col-12 pt-2">
+                  <div class="col-sm-12 col-md-6">
+                    <label for="inputAddress" class="form-label">Data Inicial</label>
+                    <input type="date" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
+                  </div>
+                
+                  <div class="col-sm-12 col-md-6">
+                    <label for="inputAddress2" class="form-label">Data Final</label>
+                    <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                  </div>
                 </div>
-                <div class="col-6">
-                  <label for="inputAddress2" class="form-label">Data Final</label>
-                  <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputCity" class="form-label">Status</label>
-                  <select id="inputState" class="form-select form-select-sm">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="inputState" class="form-label">Empresa</label>
-                  <select id="inputState" class="form-select form-select-sm">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="inputState" class="form-label">Produto</label>
-                  <select id="inputState" class="form-select form-select-sm">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="inputState" class="form-label">Assunto</label>
-                  <select id="inputState" class="form-select form-select-sm">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                  </select>
+
+                <div class="row col-12 pt-2">
+                  <div class="col-sm-12 col-md-4 col-lg-2">
+                    <label for="inputCity" class="form-label">Status</label>
+                    <select id="inputState" class="form-select form-select-sm">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-12 col-md-8 col-lg-5">
+                    <label for="inputState" class="form-label">Empresa</label>
+                    <select id="inputState" class="form-select form-select-sm">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-3">
+                    <label for="inputState" class="form-label">Produto</label>
+                    <select id="inputState" class="form-select form-select-sm">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-2">
+                    <label for="inputState" class="form-label">Assunto</label>
+                    <select id="inputState" class="form-select form-select-sm">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div class="col-12">
