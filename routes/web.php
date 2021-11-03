@@ -26,9 +26,13 @@ Route::get('/cadastros', function () {
 });
 
 Route::get('/chamados', function () {
-    return view('dashboard/chamados');
+    return view('dashboard/chamado/chamados');
 });
 
 Route::get('/relatorios', function () {
     return view('dashboard/relatorios');
+});
+
+Route::get('/chamado/{id}', function ($id) {
+    return view('dashboard/chamado/chamado',['id' => $id]);
 });
