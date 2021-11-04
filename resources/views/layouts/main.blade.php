@@ -156,8 +156,8 @@
     </div>
 
 
-    <div class="container principal ">
-      <div class="row m-1">
+    <div class="container">
+      <div class="row">
         @yield('sub-nav')
         @yield('content')
       </div>
