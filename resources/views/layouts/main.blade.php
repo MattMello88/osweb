@@ -165,60 +165,8 @@
   </main>
 
   <script src="{{ url('js/app.js') }}"></script>
-  <script>
-    new gridjs.Grid({
-      columns: [
-        {
-          name: 'Id',
-          sort: {
-            enabled: true
-          }
-        },
-        {
-          name: 'Brand',
-          sort: {
-            enabled: true
-          }
-        },
-        {
-          name: 'Nome',
-          sort: {
-            enabled: true
-          }
-        },
-        {
-          name: 'Preço',
-          sort: {
-            enabled: true
-          }
-        }],
-        server: {
-          method: "GET",
-          url: 'https://makeup-api.herokuapp.com/api/v1/products.json',
-          then: data => data.map(produto =>
-            [produto.id, produto.brand, produto.name, produto.price]
-          )
-        },
-      pagination: {
-        limit: 15,
-      },
-      search: {
-        enabled: true
-      },
-      data: [
-        ["John", "john@example.com", "(353) 01 222 3333"],
-        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
-        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
-        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
-        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
-        ["John", "john@example.com", "(353) 01 222 3333"],
-        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
-        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
-        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
-        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
-      ]
-    }).render(document.getElementById("wrapper"));
-  </script>
+  @yield('script')
+
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 </body>
 

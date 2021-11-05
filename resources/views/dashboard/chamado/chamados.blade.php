@@ -50,12 +50,12 @@
                 </div>
                 <div class="row col-12 pt-2">
                   <div class="col-sm-12 col-md-6">
-                    <label for="inputAddress" class="form-label">Data Inicial</label>
+                    <label for="inputAddress" class="form-label">Data Abertura</label>
                     <input type="date" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
                   </div>
-                
+
                   <div class="col-sm-12 col-md-6">
-                    <label for="inputAddress2" class="form-label">Data Final</label>
+                    <label for="inputAddress2" class="form-label">Data Final Abertura</label>
                     <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
                   </div>
                 </div>
@@ -104,3 +104,59 @@
 @endsection
 
 
+@section('script')
+<script>
+    new gridjs.Grid({
+      columns: [
+        {
+          name: 'Id',
+          sort: {
+            enabled: true
+          }
+        },
+        {
+          name: 'Brand',
+          sort: {
+            enabled: true
+          }
+        },
+        {
+          name: 'Nome',
+          sort: {
+            enabled: true
+          }
+        },
+        {
+          name: 'Preço',
+          sort: {
+            enabled: true
+          }
+        }],
+        server: {
+          method: "GET",
+          url: 'https://makeup-api.herokuapp.com/api/v1/products.json',
+          then: data => data.map(produto =>
+            [produto.id, produto.brand, produto.name, produto.price]
+          )
+        },
+      pagination: {
+        limit: 15,
+      },
+      search: {
+        enabled: true
+      },
+      data: [
+        ["John", "john@example.com", "(353) 01 222 3333"],
+        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
+        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
+        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
+        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
+        ["John", "john@example.com", "(353) 01 222 3333"],
+        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
+        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
+        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
+        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
+      ]
+    }).render(document.getElementById("wrapper"));
+  </script>
+@endsection
