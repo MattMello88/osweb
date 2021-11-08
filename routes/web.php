@@ -21,18 +21,18 @@ Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
 });
 
-Route::get('/cadastros', function () {
-    return view('dashboard/cadastros');
+Route::get('/dashboard/cadastros', function () {
+    return view('dashboard/cadastros/index');
 });
 
-Route::get('/chamados', function () {
-    return view('dashboard/chamado/chamados');
+Route::get('/dashboard/chamados', function () {
+    return view('dashboard/chamados/index');
 });
 
-Route::get('/relatorios', function () {
-    return view('dashboard/relatorios');
+Route::get('/dashboard/relatorios', function () {
+    return view('dashboard/relatorios/index');
 });
 
-Route::get('/chamado/{id}', function ($id) {
-    return view('dashboard/chamado/chamado',['id' => $id]);
+Route::get('/dashboard/chamado/{id}', function ($id) {
+    return view('dashboard/chamados/chamado',['id' => $id]);
 });

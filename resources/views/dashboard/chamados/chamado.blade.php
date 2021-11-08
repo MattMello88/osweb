@@ -9,10 +9,10 @@
         <h1 class="h2">Chamado {{$id}}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-outline-secondary">
+            <a href="{{url('chamados')}}" rule="button" class="btn btn-outline-secondary">
               <i class="bi bi-arrow-left-square" style="font-size: 1.1rem;"></i>
               Voltar
-            </button>
+            </a>
             <button type="button" class="btn btn-outline-secondary">
               <i class="bi bi-lock" style="font-size: 1.1rem;"></i>
               Encerrar
@@ -113,15 +113,24 @@
               <p>Descrição completa do chamado</p>
             </div>
             <div class="tab-pane fade" id="nav-tramite" role="tabpanel" aria-labelledby="nav-tramite-tab">
+
+              <button type="button" class="btn btn-outline-primary mb-4">
+                <i class="bi bi-file-text" style="font-size: 1.1rem;"></i>
+                  Adicionar
+              </button>
+
               <div id="tab-tramite"></div>
+
             </div>
             <div class="tab-pane fade" id="nav-anexo" role="tabpanel" aria-labelledby="nav-anexo-tab">
               <div class="mb-3">
-                <label for="formFileSm" class="form-label">Small file input example</label>
+                <label for="formFileSm" class="form-label">Anexar Arquivo</label>
                 <input class="form-control form-control-sm" id="formFileSm" type="file">
               </div>
 
-              <div id="tab-anexo"></div>
+              <div class="table-responsive">
+                <div id="tab-anexo"></div>
+              </div>
             </div>
             <div class="tab-pane fade" id="nav-solucao" role="tabpanel" aria-labelledby="nav-solucao-tab">
               <textarea name="solucao" id="solucao" cols="130" rows="20">
@@ -186,16 +195,19 @@
       resizable: true,
       pagination: {
         limit: 10,
+      },
+      className: {
+        td: 'p-1 fs-6 fw-light',
       }
     }).render(document.getElementById("tab-tramite"));
 
     new gridjs.Grid({
       columns: [
-        { id: "Código",name: html('<div style="border: 1px solid #ccc;padding: 5px;border-radius: 5px;text-align: center;">Código</div>') },
-        { name: 'Nome', width: '70%'}
+        { name: "Código",width:'30%', minWidth: '150px'},
+        { name: 'Nome', width:'100%', minWidth: '200px'}
       ],
       data: [
-        ["John", "john@example.comddddddddddddd"],
+        ["John", "john@example.com"],
         ["Mark", "mark@gmail.com"],
         ["Eoin", "eoin@gmail.com"],
         ["Sarah", "sarahcdd@gmail.com"],
@@ -206,10 +218,13 @@
         ["Sarah", "sarahcdd@gmail.com"],
         ["Afshin", "afshin@mail.com"],
       ],
-
-
+      width:'500px',
+      minWidth: '350px',
       pagination: {
         limit: 10,
+      },
+      className: {
+        td: 'p-1 fs-6 fw-light',
       }
     }).render(document.getElementById("tab-anexo"));
   </script>

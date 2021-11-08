@@ -122,19 +122,19 @@
           </a>
         </li>
         <li>
-          <a href="{{url('chamados')}}" class="nav-link text-white">
+          <a href="{{url('dashboard/chamados')}}" class="nav-link text-white">
             <i class="bi bi-book pe-2" style="font-size: 1.1rem;"></i>
             Chamados
           </a>
         </li>
         <li>
-          <a href="{{url('cadastros')}}" class="nav-link text-white">
+          <a href="{{url('dashboard/cadastros')}}" class="nav-link text-white">
             <i class="bi bi-receipt pe-2" style="font-size: 1.1rem;"></i>
             Cadastros
           </a>
         </li>
         <li>
-          <a href="{{url('relatorios')}}" class="nav-link text-white">
+          <a href="{{url('dashboard/relatorios')}}" class="nav-link text-white">
             <i class="bi bi-file-earmark-text pe-2" style="font-size: 1.1rem;"></i>
             Relatórios
           </a>
