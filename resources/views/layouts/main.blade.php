@@ -150,7 +150,7 @@
           <li><a class="dropdown-item" href="#">Configurações</a></li>
           <li><a class="dropdown-item" href="#">Perfil</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Logout</a></li>
+          <li><a class="dropdown-item" href="{{url('dashboard/logout')}}">Logout</a></li>
         </ul>
       </div>
     </div>

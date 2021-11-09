@@ -15,24 +15,41 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('login');
 
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
+  return view('dashboard/dashboard');
+});*/
+
+
+
+Route::middleware(['osauth'])->prefix('dashboard')->group(function () {
+
+  Route::get('/', function () {
     return view('dashboard/dashboard');
-});
+  });
 
-Route::get('/dashboard/cadastros', function () {
-    return view('dashboard/cadastros/index');
-});
+  Route::get('/logout', function () {
+    session()->flush();
+    session()->invalidate();
+    return redirect()->route('login');
+  });
 
-Route::get('/dashboard/chamados', function () {
-    return view('dashboard/chamados/index');
-});
 
-Route::get('/dashboard/relatorios', function () {
-    return view('dashboard/relatorios/index');
-});
+  Route::get('/cadastros', function () {
+      return view('dashboard/cadastros/index');
+  });
 
-Route::get('/dashboard/chamado/{id}', function ($id) {
-    return view('dashboard/chamados/chamado',['id' => $id]);
+  Route::get('/chamados', function () {
+      return view('dashboard/chamados/index');
+  });
+
+  Route::get('/relatorios', function () {
+      return view('dashboard/relatorios/index');
+  });
+
+  Route::get('/chamado/{id}', function ($id) {
+      return view('dashboard/chamados/chamado',['id' => $id]);
+  });
+
 });
