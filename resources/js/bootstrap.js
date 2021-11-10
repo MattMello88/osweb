@@ -90,18 +90,6 @@ window.setCookie = function (cname, cvalue, exdays){
       window.location = url + '/';
     });
 
-/*
-    if (token != "") {
-      window.location = url + '/dashboard';
-      /*alert("Welcome again " + token);
-    } else {
-      window.location = url + '/';
-      /*token = prompt("Please enter your name:","");
-      if (token != "" && token != null) {
-        setCookie("token", token, 30);
-      }
-    }
-    */
   }
 
   window.doLogout = function(event){
