@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +24,16 @@ Route::get('/', function () {
 
 
 
-Route::middleware(['osauth'])->prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->group(function () {
 
   Route::get('/', function () {
     return view('dashboard/dashboard');
   });
 
-  Route::get('/logout', function () {
+  Route::get('/logout', function (Request $request) {
     session()->flush();
     session()->invalidate();
+
     return redirect()->route('login');
   });
 

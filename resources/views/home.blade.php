@@ -126,7 +126,7 @@
         } else {
           setCookie('token', data.token);
           setCookie('usuario', data.usuario);
-          //checkLogin();
+          window.location = url + '/dashboard';
         }
 
 

@@ -16,8 +16,10 @@ use App\Http\Controllers\OsUsuarioController;
 |
 */
 
-Route::middleware('osauth')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+  Route::get('/checkLogin', function (Request $request) {
+    return ['Authorization' => 'true'];
+  });
 });
 
 Route::prefix('usuario')->group(function () {

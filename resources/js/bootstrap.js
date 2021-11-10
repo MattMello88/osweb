@@ -66,27 +66,44 @@ window.setCookie = function (cname, cvalue, exdays){
 
   window.checkLogin = function() {
     let token = getCookie("token");
+
+    fetch(url+'/api/checkLogin', {
+      method: "GET",
+      headers: [
+        ["Accept", "application/json"],
+        ["Authorization", "Bearer " + token],
+      ]
+    })
+    .then(function(res){
+      return res.json();
+    })
+    .then(function(data) {
+      if (data.Authorization !== undefined){
+        if (data.Authorization !== 'true'){
+          window.location = url + '/';
+        }
+      } else {
+        window.location = url + '/';
+      }
+    })
+    .catch(function(err){
+      window.location = url + '/';
+    });
+
+/*
     if (token != "") {
       window.location = url + '/dashboard';
-      /*alert("Welcome again " + token);*/
+      /*alert("Welcome again " + token);
     } else {
       window.location = url + '/';
       /*token = prompt("Please enter your name:","");
       if (token != "" && token != null) {
         setCookie("token", token, 30);
-      }*/
+      }
     }
+    */
   }
 
   window.doLogout = function(event){
       setCookie('token', null, 0);
   }
-
-window.checkLogin = function() {
-    let token = getCookie("token");
-      if (token != "") {
-      window.location = url + '/dashboard';
-    } else {
-      window.location = url + '/login';
-    }
-}
