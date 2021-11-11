@@ -14,7 +14,8 @@ class OsContatoController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsContato::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,16 @@ class OsContatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsContato;
+      $data->ID_CONTATO = $request->ID_CONTATO;
+      $data->DS_RAMAL = $request->DS_RAMAL;
+      $data->DS_TELEFONE = $request->DS_TELEFONE;
+      $data->DS_EMAIL = $request->DS_EMAIL;
+      $data->DS_FUNCAO = $request->DS_FUNCAO;
+      $data->NM_CONTATO = $request->NM_CONTATO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +46,7 @@ class OsContatoController extends Controller
      */
     public function show(OsContato $osContato)
     {
-        //
+      return $osContato;
     }
 
     /**
@@ -46,9 +56,17 @@ class OsContatoController extends Controller
      * @param  \App\Models\OsContato  $osContato
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsContato $osContato)
+    public function update(Request $request, OsContato $data)
     {
-        //
+      $data->ID_CONTATO = $request->ID_CONTATO;
+      $data->DS_RAMAL = $request->DS_RAMAL;
+      $data->DS_TELEFONE = $request->DS_TELEFONE;
+      $data->DS_EMAIL = $request->DS_EMAIL;
+      $data->DS_FUNCAO = $request->DS_FUNCAO;
+      $data->NM_CONTATO = $request->NM_CONTATO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +75,9 @@ class OsContatoController extends Controller
      * @param  \App\Models\OsContato  $osContato
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsContato $osContato)
+    public function destroy(OsContato $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

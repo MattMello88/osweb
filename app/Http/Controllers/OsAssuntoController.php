@@ -14,7 +14,8 @@ class OsAssuntoController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsAssunto::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,14 @@ class OsAssuntoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsAssunto;
+      $data->ID_ASSUNTO = $request->ID_ASSUNTO;
+      $data->DS_EMAIL = $request->DS_EMAIL;
+      $data->DM_SLA = $request->DM_SLA;
+      $data->DS_ASSUNTO = $request->DS_ASSUNTO;
+      $data->ID_PRODUTO = $request->ID_PRODUTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +44,7 @@ class OsAssuntoController extends Controller
      */
     public function show(OsAssunto $osAssunto)
     {
-        //
+      return $osAssunto;
     }
 
     /**
@@ -46,9 +54,15 @@ class OsAssuntoController extends Controller
      * @param  \App\Models\OsAssunto  $osAssunto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsAssunto $osAssunto)
+    public function update(Request $request, OsAssunto $data)
     {
-        //
+      $data->ID_ASSUNTO = $request->ID_ASSUNTO;
+      $data->DS_EMAIL = $request->DS_EMAIL;
+      $data->DM_SLA = $request->DM_SLA;
+      $data->DS_ASSUNTO = $request->DS_ASSUNTO;
+      $data->ID_PRODUTO = $request->ID_PRODUTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +71,9 @@ class OsAssuntoController extends Controller
      * @param  \App\Models\OsAssunto  $osAssunto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsAssunto $osAssunto)
+    public function destroy(OsAssunto $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

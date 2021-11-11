@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class OsEmailTemplate extends Model
 {
     use HasFactory;
+
+    protected $table = 'os_email_template';
 }

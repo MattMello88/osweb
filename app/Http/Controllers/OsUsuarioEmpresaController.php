@@ -25,7 +25,8 @@ class OsUsuarioEmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
     }
 
     /**
@@ -48,7 +49,8 @@ class OsUsuarioEmpresaController extends Controller
      */
     public function update(Request $request, OsUsuarioEmpresa $osUsuarioEmpresa)
     {
-        //
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
     }
 
     /**

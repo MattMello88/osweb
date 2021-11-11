@@ -25,7 +25,10 @@ class OsPrevisaoDeAtendimentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_PREVISAO_DE_ATENTIMENTO = $request->ID_PREVISAO_DE_ATENTIMENTO;
+      $data->ENCERRAMENTO = $request->ENCERRAMENTO;
+      $data->SLA = $request->SLA;
+      $data->INICIO = $request->INICIO;
     }
 
     /**
@@ -48,7 +51,10 @@ class OsPrevisaoDeAtendimentoController extends Controller
      */
     public function update(Request $request, OsPrevisaoDeAtendimento $osPrevisaoDeAtendimento)
     {
-        //
+      $data->ID_PREVISAO_DE_ATENTIMENTO = $request->ID_PREVISAO_DE_ATENTIMENTO;
+      $data->ENCERRAMENTO = $request->ENCERRAMENTO;
+      $data->SLA = $request->SLA;
+      $data->INICIO = $request->INICIO;
     }
 
     /**

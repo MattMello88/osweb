@@ -25,7 +25,11 @@ class OsObservacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_OBSERVACAO = $request->ID_OBSERVACAO;
+      $data->DT_OBSERVACAO = $request->DT_OBSERVACAO;
+      $data->DS_DESCRICAO = $request->DS_DESCRICAO;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->ID_USUARIO = $request->ID_USUARIO;
     }
 
     /**
@@ -48,7 +52,11 @@ class OsObservacaoController extends Controller
      */
     public function update(Request $request, OsObservacao $osObservacao)
     {
-        //
+      $data->ID_OBSERVACAO = $request->ID_OBSERVACAO;
+      $data->DT_OBSERVACAO = $request->DT_OBSERVACAO;
+      $data->DS_DESCRICAO = $request->DS_DESCRICAO;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->ID_USUARIO = $request->ID_USUARIO;
     }
 
     /**

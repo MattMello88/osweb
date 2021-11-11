@@ -25,7 +25,10 @@ class OsInterrupcaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_INTERRUPCAO = $request->ID_INTERRUPCAO;
+      $data->DT_INTERRUPCAO = $request->DT_INTERRUPCAO;
+      $data->DT_REINICIO = $request->DT_REINICIO;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
     }
 
     /**
@@ -48,7 +51,10 @@ class OsInterrupcaoController extends Controller
      */
     public function update(Request $request, OsInterrupcao $osInterrupcao)
     {
-        //
+      $data->ID_INTERRUPCAO = $request->ID_INTERRUPCAO;
+      $data->DT_INTERRUPCAO = $request->DT_INTERRUPCAO;
+      $data->DT_REINICIO = $request->DT_REINICIO;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
     }
 
     /**

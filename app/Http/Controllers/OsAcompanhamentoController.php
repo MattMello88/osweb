@@ -14,7 +14,8 @@ class OsAcompanhamentoController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsAcompanhamento::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,17 @@ class OsAcompanhamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsAcompanhamento;
+      $data->ID_ACOMPANHAMENTO = $request->ID_ACOMPANHAMENTO;
+      $data->VL_ADIANTAMENTO = $request->VL_ADIANTAMENTO;
+      $data->MOTIVO = $request->MOTIVO;
+      $data->DT_INICIO = $request->DT_INICIO;
+      $data->DT_CADASTRO = $request->DT_CADASTRO;
+      $data->DT_FIM = $request->DT_FIM;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +47,7 @@ class OsAcompanhamentoController extends Controller
      */
     public function show(OsAcompanhamento $osAcompanhamento)
     {
-        //
+        return $osAcompanhamento;
     }
 
     /**
@@ -46,9 +57,18 @@ class OsAcompanhamentoController extends Controller
      * @param  \App\Models\OsAcompanhamento  $osAcompanhamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsAcompanhamento $osAcompanhamento)
+    public function update(Request $request, OsAcompanhamento $data)
     {
-        //
+      $data->ID_ACOMPANHAMENTO = $request->ID_ACOMPANHAMENTO;
+      $data->VL_ADIANTAMENTO = $request->VL_ADIANTAMENTO;
+      $data->MOTIVO = $request->MOTIVO;
+      $data->DT_INICIO = $request->DT_INICIO;
+      $data->DT_CADASTRO = $request->DT_CADASTRO;
+      $data->DT_FIM = $request->DT_FIM;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +77,9 @@ class OsAcompanhamentoController extends Controller
      * @param  \App\Models\OsAcompanhamento  $osAcompanhamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsAcompanhamento $osAcompanhamento)
+    public function destroy(OsAcompanhamento $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

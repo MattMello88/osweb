@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OsContratoDespesa;
 use Illuminate\Http\Request;
 
-class OsContratoDespesaController extends Controller
+class OsDescritoroDespesaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,8 @@ class OsContratoDespesaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
+      $data->DESCRICAO = $request->DESCRICAO;
     }
 
     /**
@@ -48,7 +49,8 @@ class OsContratoDespesaController extends Controller
      */
     public function update(Request $request, OsContratoDespesa $osContratoDespesa)
     {
-        //
+      $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
+      $data->DESCRICAO = $request->DESCRICAO;
     }
 
     /**

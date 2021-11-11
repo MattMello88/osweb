@@ -25,7 +25,9 @@ class OsSegmentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_SEG_EMP = $request->ID_SEG_EMP;
+      $data->COD_RECEITA = $request->COD_RECEITA;
+      $data->DS_SEG_EMP = $request->DS_SEG_EMP;
     }
 
     /**
@@ -48,7 +50,9 @@ class OsSegmentoController extends Controller
      */
     public function update(Request $request, OsSegmento $osSegmento)
     {
-        //
+      $data->ID_SEG_EMP = $request->ID_SEG_EMP;
+      $data->COD_RECEITA = $request->COD_RECEITA;
+      $data->DS_SEG_EMP = $request->DS_SEG_EMP;
     }
 
     /**

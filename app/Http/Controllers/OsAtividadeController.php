@@ -14,7 +14,8 @@ class OsAtividadeController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsAtividade::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,13 @@ class OsAtividadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsAtividade;
+      $data->ID_ATIVIDADE = $request->ID_ATIVIDADE;
+      $data->TITULO = $request->TITULO;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +43,7 @@ class OsAtividadeController extends Controller
      */
     public function show(OsAtividade $osAtividade)
     {
-        //
+      return $osAtividade;
     }
 
     /**
@@ -46,9 +53,14 @@ class OsAtividadeController extends Controller
      * @param  \App\Models\OsAtividade  $osAtividade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsAtividade $osAtividade)
+    public function update(Request $request, OsAtividade $data)
     {
-        //
+      $data->ID_ATIVIDADE = $request->ID_ATIVIDADE;
+      $data->TITULO = $request->TITULO;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +69,9 @@ class OsAtividadeController extends Controller
      * @param  \App\Models\OsAtividade  $osAtividade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsAtividade $osAtividade)
+    public function destroy(OsAtividade $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

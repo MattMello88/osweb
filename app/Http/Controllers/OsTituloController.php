@@ -25,7 +25,14 @@ class OsTituloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID = $request->ID;
+      $data->VENCIMENTO = $request->VENCIMENTO;
+      $data->PAGAMENTO = $request->PAGAMENTO;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->STATUS = $request->STATUS;
+      $data->FORMAPAGAMENTO = $request->FORMAPAGAMENTO;
+      $data->VALOR = $request->VALOR;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
     }
 
     /**
@@ -48,7 +55,14 @@ class OsTituloController extends Controller
      */
     public function update(Request $request, OsTitulo $osTitulo)
     {
-        //
+      $data->ID = $request->ID;
+      $data->VENCIMENTO = $request->VENCIMENTO;
+      $data->PAGAMENTO = $request->PAGAMENTO;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->STATUS = $request->STATUS;
+      $data->FORMAPAGAMENTO = $request->FORMAPAGAMENTO;
+      $data->VALOR = $request->VALOR;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
     }
 
     /**

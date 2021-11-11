@@ -25,7 +25,8 @@ class OsEmpresaProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->ID_PRODUTO = $request->ID_PRODUTO;
     }
 
     /**
@@ -48,7 +49,8 @@ class OsEmpresaProdutoController extends Controller
      */
     public function update(Request $request, OsEmpresaProduto $osEmpresaProduto)
     {
-        //
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->ID_PRODUTO = $request->ID_PRODUTO;
     }
 
     /**

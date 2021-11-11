@@ -25,7 +25,9 @@ class OsProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_PRODUTO = $request->ID_PRODUTO;
+      $data->NM_PRODUTO = $request->NM_PRODUTO;
+      $data->DM_ATIVO = $request->DM_ATIVO;
     }
 
     /**
@@ -48,7 +50,9 @@ class OsProdutoController extends Controller
      */
     public function update(Request $request, OsProduto $osProduto)
     {
-        //
+      $data->ID_PRODUTO = $request->ID_PRODUTO;
+      $data->NM_PRODUTO = $request->NM_PRODUTO;
+      $data->DM_ATIVO = $request->DM_ATIVO;
     }
 
     /**

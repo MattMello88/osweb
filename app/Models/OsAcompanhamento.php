@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class OsAcompanhamento extends Model
 {
     use HasFactory;
+
+    protected $table = 'os_acompanhamento';
 }

@@ -25,7 +25,9 @@ class OsImpostoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_IMPOSTO = $request->ID_IMPOSTO;
+      $data->NOME = $request->NOME;
+      $data->VALOR = $request->VALOR;
     }
 
     /**
@@ -48,7 +50,9 @@ class OsImpostoController extends Controller
      */
     public function update(Request $request, OsImposto $osImposto)
     {
-        //
+      $data->ID_IMPOSTO = $request->ID_IMPOSTO;
+      $data->NOME = $request->NOME;
+      $data->VALOR = $request->VALOR;
     }
 
     /**

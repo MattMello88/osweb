@@ -14,7 +14,8 @@ class OsApontamentoController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsApontamento::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,14 @@ class OsApontamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsApontamento;
+      $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
+      $data->INTERVALO = $request->INTERVALO;
+      $data->DT_SAIDA = $request->DT_SAIDA;
+      $data->DT_CHEGADA = $request->DT_CHEGADA;
+      $data->ID_ACOMPANHAMENTO = $request->ID_ACOMPANHAMENTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +44,7 @@ class OsApontamentoController extends Controller
      */
     public function show(OsApontamento $osApontamento)
     {
-        //
+      return $osApontamento;
     }
 
     /**
@@ -46,9 +54,15 @@ class OsApontamentoController extends Controller
      * @param  \App\Models\OsApontamento  $osApontamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsApontamento $osApontamento)
+    public function update(Request $request, OsApontamento $data)
     {
-        //
+      $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
+      $data->INTERVALO = $request->INTERVALO;
+      $data->DT_SAIDA = $request->DT_SAIDA;
+      $data->DT_CHEGADA = $request->DT_CHEGADA;
+      $data->ID_ACOMPANHAMENTO = $request->ID_ACOMPANHAMENTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +71,9 @@ class OsApontamentoController extends Controller
      * @param  \App\Models\OsApontamento  $osApontamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsApontamento $osApontamento)
+    public function destroy(OsApontamento $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

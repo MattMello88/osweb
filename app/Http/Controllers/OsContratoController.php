@@ -14,7 +14,17 @@ class OsContratoController extends Controller
      */
     public function index()
     {
-        //
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->TAXARENOVACAO = $request->TAXARENOVACAO;
+      $data->DISTANCIA = $request->DISTANCIA;
+      $data->INICIO = $request->INICIO;
+      $data->VALORKM = $request->VALORKM;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->VALORPEDAGIO = $request->VALORPEDAGIO;
+      $data->VALOR = $request->VALOR;
+      $data->VALORMENSALIDADE = $request->VALORMENSALIDADE;
+      $data->TERMINO = $request->TERMINO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
     }
 
     /**
@@ -48,7 +58,17 @@ class OsContratoController extends Controller
      */
     public function update(Request $request, OsContrato $osContrato)
     {
-        //
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->TAXARENOVACAO = $request->TAXARENOVACAO;
+      $data->DISTANCIA = $request->DISTANCIA;
+      $data->INICIO = $request->INICIO;
+      $data->VALORKM = $request->VALORKM;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->VALORPEDAGIO = $request->VALORPEDAGIO;
+      $data->VALOR = $request->VALOR;
+      $data->VALORMENSALIDADE = $request->VALORMENSALIDADE;
+      $data->TERMINO = $request->TERMINO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
     }
 
     /**

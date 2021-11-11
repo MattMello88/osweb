@@ -25,7 +25,8 @@ class OsGrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->NM_GRUPO = $request->NM_GRUPO;
+      $data->DS_GRUPO = $request->DS_GRUPO;
     }
 
     /**
@@ -48,7 +49,8 @@ class OsGrupoController extends Controller
      */
     public function update(Request $request, OsGrupo $osGrupo)
     {
-        //
+      $data->NM_GRUPO = $request->NM_GRUPO;
+      $data->DS_GRUPO = $request->DS_GRUPO;
     }
 
     /**

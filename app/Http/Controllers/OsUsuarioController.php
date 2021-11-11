@@ -57,7 +57,15 @@ class OsUsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->DS_EMAIL = $request->DS_EMAIL;
+      $data->DS_TELEFONE = $request->DS_TELEFONE;
+      $data->NM_USUARIO = $request->NM_USUARIO;
+      $data->DS_FUNCAO = $request->DS_FUNCAO;
+      $data->DS_SENHA = $request->DS_SENHA;
+      $data->ATIVO = $request->ATIVO;
+      $data->DS_LOGIN = $request->DS_LOGIN;
+      $data->DT_EXPIRA = $request->DT_EXPIRA;
     }
 
     /**
@@ -80,7 +88,15 @@ class OsUsuarioController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->DS_EMAIL = $request->DS_EMAIL;
+      $data->DS_TELEFONE = $request->DS_TELEFONE;
+      $data->NM_USUARIO = $request->NM_USUARIO;
+      $data->DS_FUNCAO = $request->DS_FUNCAO;
+      $data->DS_SENHA = $request->DS_SENHA;
+      $data->ATIVO = $request->ATIVO;
+      $data->DS_LOGIN = $request->DS_LOGIN;
+      $data->DT_EXPIRA = $request->DT_EXPIRA;
     }
 
     /**

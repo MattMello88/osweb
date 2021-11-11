@@ -25,7 +25,8 @@ class OsUsuarioGrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->NM_GRUPO = $request->NM_GRUPO;
     }
 
     /**
@@ -48,7 +49,8 @@ class OsUsuarioGrupoController extends Controller
      */
     public function update(Request $request, OsUsuarioGrupo $osUsuarioGrupo)
     {
-        //
+      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->NM_GRUPO = $request->NM_GRUPO;
     }
 
     /**

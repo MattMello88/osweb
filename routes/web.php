@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +19,19 @@ Route::get('/', function () {
     return view('home');
 })->name('login');
 
-/*Route::get('/dashboard', function () {
-  return view('dashboard/dashboard');
-});*/
+Route::get('/b', function () {
+  $tables = DB::select("SELECT t.table_name FROM information_schema.tables t WHERE t.table_schema = 'osweb' AND t.table_name LIKE 'os_%'");
+
+
+  foreach ($tables as $table) {
+    echo "{$table->table_name}<br/><hr>";
+    $colunas = DB::select("SELECT t.column_name FROM information_schema.columns t WHERE t.table_schema = 'osweb' AND t.table_name = '{$table->table_name}'");
+    foreach ($colunas as $coluna) {
+       echo "\$data->{$coluna->column_name} = \$request->{$coluna->column_name};<br/>";
+    }
+    echo "<br/><br/>";
+  }
+});
 
 
 

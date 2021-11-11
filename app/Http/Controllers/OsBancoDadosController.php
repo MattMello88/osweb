@@ -14,7 +14,8 @@ class OsBancoDadosController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsBancoDado::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,11 @@ class OsBancoDadosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsBancoDado;
+      $data->ID_BANCO_DADOS = $request->ID_BANCO_DADOS;
+      $data->DS_BANCO_DADOS = $request->DS_BANCO_DADOS;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +41,7 @@ class OsBancoDadosController extends Controller
      */
     public function show(OsBancoDado $osBancoDado)
     {
-        //
+      return $osBancoDado;
     }
 
     /**
@@ -46,9 +51,12 @@ class OsBancoDadosController extends Controller
      * @param  \App\Models\OsBancoDado  $osBancoDado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsBancoDado $osBancoDado)
+    public function update(Request $request, OsBancoDado $data)
     {
-        //
+      $data->ID_BANCO_DADOS = $request->ID_BANCO_DADOS;
+      $data->DS_BANCO_DADOS = $request->DS_BANCO_DADOS;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +65,9 @@ class OsBancoDadosController extends Controller
      * @param  \App\Models\OsBancoDado  $osBancoDado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsBancoDado $osBancoDado)
+    public function destroy(OsBancoDado $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

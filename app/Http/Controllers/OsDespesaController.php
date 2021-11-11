@@ -25,7 +25,11 @@ class OsDespesaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_DESPESA = $request->ID_DESPESA;
+      $data->VALOR = $request->VALOR;
+      $data->QUANTIDADE = $request->QUANTIDADE;
+      $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
+      $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
     }
 
     /**
@@ -48,7 +52,11 @@ class OsDespesaController extends Controller
      */
     public function update(Request $request, OsDespesa $osDespesa)
     {
-        //
+      $data->ID_DESPESA = $request->ID_DESPESA;
+      $data->VALOR = $request->VALOR;
+      $data->QUANTIDADE = $request->QUANTIDADE;
+      $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
+      $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
     }
 
     /**

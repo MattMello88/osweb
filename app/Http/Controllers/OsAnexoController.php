@@ -14,7 +14,8 @@ class OsAnexoController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsAnexo::all();
+      return $data;
     }
 
     /**
@@ -25,7 +26,16 @@ class OsAnexoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsAnexo;
+      $data->ID_ANEXO = $request->ID_ANEXO;
+      $data->DS_ARQUIVO = $request->DS_ARQUIVO;
+      $data->DS_ARQUIVO_ORIGINAL = $request->DS_ARQUIVO_ORIGINAL;
+      $data->DS_CAMINHO = $request->DS_CAMINHO;
+      $data->ID_TRAMITE = $request->ID_TRAMITE;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -36,7 +46,7 @@ class OsAnexoController extends Controller
      */
     public function show(OsAnexo $osAnexo)
     {
-        //
+      return $osAnexo;
     }
 
     /**
@@ -46,9 +56,17 @@ class OsAnexoController extends Controller
      * @param  \App\Models\OsAnexo  $osAnexo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsAnexo $osAnexo)
+    public function update(Request $request, OsAnexo $data)
     {
-        //
+      $data->ID_ANEXO = $request->ID_ANEXO;
+      $data->DS_ARQUIVO = $request->DS_ARQUIVO;
+      $data->DS_ARQUIVO_ORIGINAL = $request->DS_ARQUIVO_ORIGINAL;
+      $data->DS_CAMINHO = $request->DS_CAMINHO;
+      $data->ID_TRAMITE = $request->ID_TRAMITE;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -57,8 +75,9 @@ class OsAnexoController extends Controller
      * @param  \App\Models\OsAnexo  $osAnexo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsAnexo $osAnexo)
+    public function destroy(OsAnexo $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

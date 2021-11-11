@@ -25,7 +25,11 @@ class OsEventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data->ID_EVENTO = $request->ID_EVENTO;
+      $data->DT_EVENTO = $request->DT_EVENTO;
+      $data->DS_EVENTO = $request->DS_EVENTO;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->ID_USUARIO = $request->ID_USUARIO;
     }
 
     /**
@@ -48,7 +52,11 @@ class OsEventoController extends Controller
      */
     public function update(Request $request, OsEvento $osEvento)
     {
-        //
+      $data->ID_EVENTO = $request->ID_EVENTO;
+      $data->DT_EVENTO = $request->DT_EVENTO;
+      $data->DS_EVENTO = $request->DS_EVENTO;
+      $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->ID_USUARIO = $request->ID_USUARIO;
     }
 
     /**

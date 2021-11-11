@@ -14,7 +14,8 @@ class OsContratoImpostoController extends Controller
      */
     public function index()
     {
-        //
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->ID_IMPOSTO = $request->ID_IMPOSTO;
     }
 
     /**
@@ -48,7 +49,8 @@ class OsContratoImpostoController extends Controller
      */
     public function update(Request $request, OsContratoImposto $osContratoImposto)
     {
-        //
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->ID_IMPOSTO = $request->ID_IMPOSTO;
     }
 
     /**
