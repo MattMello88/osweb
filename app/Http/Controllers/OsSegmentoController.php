@@ -14,7 +14,7 @@ class OsSegmentoController extends Controller
      */
     public function index()
     {
-        //
+      return OsSegmento::all();
     }
 
     /**
@@ -25,9 +25,12 @@ class OsSegmentoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsSegmento;
       $data->ID_SEG_EMP = $request->ID_SEG_EMP;
       $data->COD_RECEITA = $request->COD_RECEITA;
       $data->DS_SEG_EMP = $request->DS_SEG_EMP;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -38,7 +41,7 @@ class OsSegmentoController extends Controller
      */
     public function show(OsSegmento $osSegmento)
     {
-        //
+      return $osSegmento;
     }
 
     /**
@@ -48,11 +51,13 @@ class OsSegmentoController extends Controller
      * @param  \App\Models\OsSegmento  $osSegmento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsSegmento $osSegmento)
+    public function update(Request $request, OsSegmento $data)
     {
       $data->ID_SEG_EMP = $request->ID_SEG_EMP;
       $data->COD_RECEITA = $request->COD_RECEITA;
       $data->DS_SEG_EMP = $request->DS_SEG_EMP;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -61,8 +66,9 @@ class OsSegmentoController extends Controller
      * @param  \App\Models\OsSegmento  $osSegmento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsSegmento $osSegmento)
+    public function destroy(OsSegmento $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

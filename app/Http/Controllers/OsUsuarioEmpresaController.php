@@ -14,7 +14,7 @@ class OsUsuarioEmpresaController extends Controller
      */
     public function index()
     {
-        //
+      return OsUsuarioEmpresa::all();
     }
 
     /**
@@ -25,8 +25,11 @@ class OsUsuarioEmpresaController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsUsuarioEmpresa;
       $data->ID_USUARIO = $request->ID_USUARIO;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -37,7 +40,7 @@ class OsUsuarioEmpresaController extends Controller
      */
     public function show(OsUsuarioEmpresa $osUsuarioEmpresa)
     {
-        //
+      return $osUsuarioEmpresa;
     }
 
     /**
@@ -47,10 +50,12 @@ class OsUsuarioEmpresaController extends Controller
      * @param  \App\Models\OsUsuarioEmpresa  $osUsuarioEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsUsuarioEmpresa $osUsuarioEmpresa)
+    public function update(Request $request, OsUsuarioEmpresa $data)
     {
       $data->ID_USUARIO = $request->ID_USUARIO;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -59,8 +64,9 @@ class OsUsuarioEmpresaController extends Controller
      * @param  \App\Models\OsUsuarioEmpresa  $osUsuarioEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsUsuarioEmpresa $osUsuarioEmpresa)
+    public function destroy(OsUsuarioEmpresa $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

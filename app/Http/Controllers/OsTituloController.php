@@ -14,7 +14,7 @@ class OsTituloController extends Controller
      */
     public function index()
     {
-        //
+      return OsTitulo::all();
     }
 
     /**
@@ -25,6 +25,7 @@ class OsTituloController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsTitulo;
       $data->ID = $request->ID;
       $data->VENCIMENTO = $request->VENCIMENTO;
       $data->PAGAMENTO = $request->PAGAMENTO;
@@ -33,6 +34,8 @@ class OsTituloController extends Controller
       $data->FORMAPAGAMENTO = $request->FORMAPAGAMENTO;
       $data->VALOR = $request->VALOR;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -43,7 +46,7 @@ class OsTituloController extends Controller
      */
     public function show(OsTitulo $osTitulo)
     {
-        //
+      return $osTitulo;
     }
 
     /**
@@ -53,7 +56,7 @@ class OsTituloController extends Controller
      * @param  \App\Models\OsTitulo  $osTitulo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsTitulo $osTitulo)
+    public function update(Request $request, OsTitulo $data)
     {
       $data->ID = $request->ID;
       $data->VENCIMENTO = $request->VENCIMENTO;
@@ -63,6 +66,8 @@ class OsTituloController extends Controller
       $data->FORMAPAGAMENTO = $request->FORMAPAGAMENTO;
       $data->VALOR = $request->VALOR;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -71,8 +76,9 @@ class OsTituloController extends Controller
      * @param  \App\Models\OsTitulo  $osTitulo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsTitulo $osTitulo)
+    public function destroy(OsTitulo $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

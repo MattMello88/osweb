@@ -14,7 +14,7 @@ class OsProdutoController extends Controller
      */
     public function index()
     {
-        //
+      return OsProduto::all();
     }
 
     /**
@@ -25,9 +25,12 @@ class OsProdutoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsProduto;
       $data->ID_PRODUTO = $request->ID_PRODUTO;
       $data->NM_PRODUTO = $request->NM_PRODUTO;
       $data->DM_ATIVO = $request->DM_ATIVO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -38,7 +41,7 @@ class OsProdutoController extends Controller
      */
     public function show(OsProduto $osProduto)
     {
-        //
+      return $osProduto;
     }
 
     /**
@@ -48,11 +51,13 @@ class OsProdutoController extends Controller
      * @param  \App\Models\OsProduto  $osProduto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsProduto $osProduto)
+    public function update(Request $request, OsProduto $data)
     {
       $data->ID_PRODUTO = $request->ID_PRODUTO;
       $data->NM_PRODUTO = $request->NM_PRODUTO;
       $data->DM_ATIVO = $request->DM_ATIVO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -61,8 +66,9 @@ class OsProdutoController extends Controller
      * @param  \App\Models\OsProduto  $osProduto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsProduto $osProduto)
+    public function destroy(OsProduto $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

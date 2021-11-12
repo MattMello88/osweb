@@ -39,34 +39,16 @@
     new gridjs.Grid({
       columns: [
         {
-          name: 'Id',
-          sort: {
-            enabled: true
-          }
-        },
-        {
-          name: 'Brand',
-          sort: {
-            enabled: true
-          }
-        },
-        {
-          name: 'Nome',
-          sort: {
-            enabled: true
-          }
-        },
-        {
-          name: 'Preço',
+          name: 'ID_CHAMADO',
           sort: {
             enabled: true
           }
         }],
         server: {
           method: "GET",
-          url: 'https://makeup-api.herokuapp.com/api/v1/products.json',
-          then: data => data.map(produto =>
-            [produto.id, produto.brand, produto.name, produto.price]
+          url: url + '/api/oschamado',
+          then: data => data.map(oschamado =>
+            [oschamado.ID_CHAMADO]
           )
         },
       pagination: {

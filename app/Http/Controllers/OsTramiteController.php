@@ -14,7 +14,7 @@ class OsTramiteController extends Controller
      */
     public function index()
     {
-        //
+      return OsTramite::all();
     }
 
     /**
@@ -25,6 +25,7 @@ class OsTramiteController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsTramite;
       $data->ID_TRAMITE = $request->ID_TRAMITE;
       $data->DT_INICIO = $request->DT_INICIO;
       $data->DT_FIM = $request->DT_FIM;
@@ -39,6 +40,8 @@ class OsTramiteController extends Controller
       $data->DS_REDUZIDA = $request->DS_REDUZIDA;
       $data->NR_PRIORIDADE = $request->NR_PRIORIDADE;
       $data->DM_SITUACAO = $request->DM_SITUACAO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -49,7 +52,7 @@ class OsTramiteController extends Controller
      */
     public function show(OsTramite $osTramite)
     {
-        //
+      return $osTramite;
     }
 
     /**
@@ -59,7 +62,7 @@ class OsTramiteController extends Controller
      * @param  \App\Models\OsTramite  $osTramite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsTramite $osTramite)
+    public function update(Request $request, OsTramite $data)
     {
       $data->ID_TRAMITE = $request->ID_TRAMITE;
       $data->DT_INICIO = $request->DT_INICIO;
@@ -75,6 +78,8 @@ class OsTramiteController extends Controller
       $data->DS_REDUZIDA = $request->DS_REDUZIDA;
       $data->NR_PRIORIDADE = $request->NR_PRIORIDADE;
       $data->DM_SITUACAO = $request->DM_SITUACAO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -83,8 +88,9 @@ class OsTramiteController extends Controller
      * @param  \App\Models\OsTramite  $osTramite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsTramite $osTramite)
+    public function destroy(OsTramite $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

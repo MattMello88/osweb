@@ -14,7 +14,7 @@ class OsGrupoController extends Controller
      */
     public function index()
     {
-        //
+      return OsGrupo::all();
     }
 
     /**
@@ -25,8 +25,11 @@ class OsGrupoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsGrupo;
       $data->NM_GRUPO = $request->NM_GRUPO;
       $data->DS_GRUPO = $request->DS_GRUPO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -37,7 +40,7 @@ class OsGrupoController extends Controller
      */
     public function show(OsGrupo $osGrupo)
     {
-        //
+      return $osGrupo;
     }
 
     /**
@@ -47,10 +50,12 @@ class OsGrupoController extends Controller
      * @param  \App\Models\OsGrupo  $osGrupo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsGrupo $osGrupo)
+    public function update(Request $request, OsGrupo $data)
     {
       $data->NM_GRUPO = $request->NM_GRUPO;
       $data->DS_GRUPO = $request->DS_GRUPO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -59,8 +64,9 @@ class OsGrupoController extends Controller
      * @param  \App\Models\OsGrupo  $osGrupo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsGrupo $osGrupo)
+    public function destroy(OsGrupo $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

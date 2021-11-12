@@ -14,7 +14,7 @@ class OsPrevisaoDeAtendimentoController extends Controller
      */
     public function index()
     {
-        //
+      return OsPrevisaoDeAtendimento::all();
     }
 
     /**
@@ -25,10 +25,13 @@ class OsPrevisaoDeAtendimentoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsPrevisaoDeAtendimento;
       $data->ID_PREVISAO_DE_ATENTIMENTO = $request->ID_PREVISAO_DE_ATENTIMENTO;
       $data->ENCERRAMENTO = $request->ENCERRAMENTO;
       $data->SLA = $request->SLA;
       $data->INICIO = $request->INICIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -39,7 +42,7 @@ class OsPrevisaoDeAtendimentoController extends Controller
      */
     public function show(OsPrevisaoDeAtendimento $osPrevisaoDeAtendimento)
     {
-        //
+      return $osPrevisaoDeAtendimento;
     }
 
     /**
@@ -49,12 +52,14 @@ class OsPrevisaoDeAtendimentoController extends Controller
      * @param  \App\Models\OsPrevisaoDeAtendimento  $osPrevisaoDeAtendimento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsPrevisaoDeAtendimento $osPrevisaoDeAtendimento)
+    public function update(Request $request, OsPrevisaoDeAtendimento $data)
     {
       $data->ID_PREVISAO_DE_ATENTIMENTO = $request->ID_PREVISAO_DE_ATENTIMENTO;
       $data->ENCERRAMENTO = $request->ENCERRAMENTO;
       $data->SLA = $request->SLA;
       $data->INICIO = $request->INICIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -63,8 +68,9 @@ class OsPrevisaoDeAtendimentoController extends Controller
      * @param  \App\Models\OsPrevisaoDeAtendimento  $osPrevisaoDeAtendimento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsPrevisaoDeAtendimento $osPrevisaoDeAtendimento)
+    public function destroy(OsPrevisaoDeAtendimento $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

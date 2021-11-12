@@ -14,7 +14,7 @@ class OsObservacaoController extends Controller
      */
     public function index()
     {
-        //
+      return OsObservacao::all();
     }
 
     /**
@@ -25,11 +25,14 @@ class OsObservacaoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsObservacao;
       $data->ID_OBSERVACAO = $request->ID_OBSERVACAO;
       $data->DT_OBSERVACAO = $request->DT_OBSERVACAO;
       $data->DS_DESCRICAO = $request->DS_DESCRICAO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
       $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -40,7 +43,7 @@ class OsObservacaoController extends Controller
      */
     public function show(OsObservacao $osObservacao)
     {
-        //
+      return $osObservacao;
     }
 
     /**
@@ -50,13 +53,15 @@ class OsObservacaoController extends Controller
      * @param  \App\Models\OsObservacao  $osObservacao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsObservacao $osObservacao)
+    public function update(Request $request, OsObservacao $data)
     {
       $data->ID_OBSERVACAO = $request->ID_OBSERVACAO;
       $data->DT_OBSERVACAO = $request->DT_OBSERVACAO;
       $data->DS_DESCRICAO = $request->DS_DESCRICAO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
       $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -65,8 +70,9 @@ class OsObservacaoController extends Controller
      * @param  \App\Models\OsObservacao  $osObservacao
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsObservacao $osObservacao)
+    public function destroy(OsObservacao $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

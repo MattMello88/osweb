@@ -14,7 +14,7 @@ class OsInterrupcaoController extends Controller
      */
     public function index()
     {
-        //
+      return OsInterrupcao::all();
     }
 
     /**
@@ -25,10 +25,13 @@ class OsInterrupcaoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsInterrupcao;
       $data->ID_INTERRUPCAO = $request->ID_INTERRUPCAO;
       $data->DT_INTERRUPCAO = $request->DT_INTERRUPCAO;
       $data->DT_REINICIO = $request->DT_REINICIO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -39,7 +42,7 @@ class OsInterrupcaoController extends Controller
      */
     public function show(OsInterrupcao $osInterrupcao)
     {
-        //
+      return $osInterrupcao;
     }
 
     /**
@@ -49,12 +52,14 @@ class OsInterrupcaoController extends Controller
      * @param  \App\Models\OsInterrupcao  $osInterrupcao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsInterrupcao $osInterrupcao)
+    public function update(Request $request, OsInterrupcao $data)
     {
       $data->ID_INTERRUPCAO = $request->ID_INTERRUPCAO;
       $data->DT_INTERRUPCAO = $request->DT_INTERRUPCAO;
       $data->DT_REINICIO = $request->DT_REINICIO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -63,8 +68,9 @@ class OsInterrupcaoController extends Controller
      * @param  \App\Models\OsInterrupcao  $osInterrupcao
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsInterrupcao $osInterrupcao)
+    public function destroy(OsInterrupcao $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

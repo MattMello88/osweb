@@ -46,7 +46,7 @@ class OsUsuarioController extends Controller
      */
     public function index()
     {
-        //
+      return User::all();
     }
 
     /**
@@ -57,6 +57,7 @@ class OsUsuarioController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new User;
       $data->ID_USUARIO = $request->ID_USUARIO;
       $data->DS_EMAIL = $request->DS_EMAIL;
       $data->DS_TELEFONE = $request->DS_TELEFONE;
@@ -66,6 +67,8 @@ class OsUsuarioController extends Controller
       $data->ATIVO = $request->ATIVO;
       $data->DS_LOGIN = $request->DS_LOGIN;
       $data->DT_EXPIRA = $request->DT_EXPIRA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -76,7 +79,7 @@ class OsUsuarioController extends Controller
      */
     public function show(User $user)
     {
-        //
+      return $user;
     }
 
     /**
@@ -86,7 +89,7 @@ class OsUsuarioController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $data)
     {
       $data->ID_USUARIO = $request->ID_USUARIO;
       $data->DS_EMAIL = $request->DS_EMAIL;
@@ -97,6 +100,8 @@ class OsUsuarioController extends Controller
       $data->ATIVO = $request->ATIVO;
       $data->DS_LOGIN = $request->DS_LOGIN;
       $data->DT_EXPIRA = $request->DT_EXPIRA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -105,8 +110,9 @@ class OsUsuarioController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

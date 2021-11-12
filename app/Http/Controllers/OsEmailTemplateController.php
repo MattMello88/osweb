@@ -14,7 +14,8 @@ class OsEmailTemplateController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsEmailTemplate::all();
+      return $data;
     }
 
     /**
@@ -25,11 +26,14 @@ class OsEmailTemplateController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsEmailTemplate;
       $data->ID_EMAIL_TEMPLATE = $request->ID_EMAIL_TEMPLATE;
       $data->DS_HTML = $request->DS_HTML;
       $data->DS_MARCADORES = $request->DS_MARCADORES;
       $data->DS_EMAIL_TEMPLATE = $request->DS_EMAIL_TEMPLATE;
       $data->TIPO = $request->TIPO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -40,7 +44,7 @@ class OsEmailTemplateController extends Controller
      */
     public function show(OsEmailTemplate $osEmailTemplate)
     {
-        //
+      return $osEmailTemplate;
     }
 
     /**
@@ -50,13 +54,15 @@ class OsEmailTemplateController extends Controller
      * @param  \App\Models\OsEmailTemplate  $osEmailTemplate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsEmailTemplate $osEmailTemplate)
+    public function update(Request $request, OsEmailTemplate $data)
     {
       $data->ID_EMAIL_TEMPLATE = $request->ID_EMAIL_TEMPLATE;
       $data->DS_HTML = $request->DS_HTML;
       $data->DS_MARCADORES = $request->DS_MARCADORES;
       $data->DS_EMAIL_TEMPLATE = $request->DS_EMAIL_TEMPLATE;
       $data->TIPO = $request->TIPO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -65,8 +71,9 @@ class OsEmailTemplateController extends Controller
      * @param  \App\Models\OsEmailTemplate  $osEmailTemplate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsEmailTemplate $osEmailTemplate)
+    public function destroy(OsEmailTemplate $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

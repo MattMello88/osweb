@@ -14,7 +14,7 @@ class OsImpostoController extends Controller
      */
     public function index()
     {
-        //
+      return OsImposto::all();
     }
 
     /**
@@ -25,9 +25,12 @@ class OsImpostoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsImposto;
       $data->ID_IMPOSTO = $request->ID_IMPOSTO;
       $data->NOME = $request->NOME;
       $data->VALOR = $request->VALOR;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -38,7 +41,7 @@ class OsImpostoController extends Controller
      */
     public function show(OsImposto $osImposto)
     {
-        //
+      return $osImposto;
     }
 
     /**
@@ -48,11 +51,13 @@ class OsImpostoController extends Controller
      * @param  \App\Models\OsImposto  $osImposto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsImposto $osImposto)
+    public function update(Request $request, OsImposto $data)
     {
       $data->ID_IMPOSTO = $request->ID_IMPOSTO;
       $data->NOME = $request->NOME;
       $data->VALOR = $request->VALOR;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -61,8 +66,9 @@ class OsImpostoController extends Controller
      * @param  \App\Models\OsImposto  $osImposto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsImposto $osImposto)
+    public function destroy(OsImposto $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

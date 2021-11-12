@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OsContratoDespesa;
+use App\Models\OsDescritorDespesa;
 use Illuminate\Http\Request;
 
-class OsDescritoroDespesaController extends Controller
+class OsDescritorDespesaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class OsDescritoroDespesaController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsDescritorDespesa::all();
+      return $data;
     }
 
     /**
@@ -25,32 +26,37 @@ class OsDescritoroDespesaController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsDescritorDespesa;
       $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
       $data->DESCRICAO = $request->DESCRICAO;
+      $data->save();
+      return $data;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OsContratoDespesa  $osContratoDespesa
+     * @param  \App\Models\OsDescritorDespesa  $OsDescritorDespesa
      * @return \Illuminate\Http\Response
      */
-    public function show(OsContratoDespesa $osContratoDespesa)
+    public function show(OsDescritorDespesa $OsDescritorDespesa)
     {
-        //
+      return $OsDescritorDespesa;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OsContratoDespesa  $osContratoDespesa
+     * @param  \App\Models\OsDescritorDespesa  $OsDescritorDespesa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsContratoDespesa $osContratoDespesa)
+    public function update(Request $request, OsDescritorDespesa $data)
     {
       $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
       $data->DESCRICAO = $request->DESCRICAO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -59,8 +65,9 @@ class OsDescritoroDespesaController extends Controller
      * @param  \App\Models\OsContratoDespesa  $osContratoDespesa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsContratoDespesa $osContratoDespesa)
+    public function destroy(OsDescritorDespesa $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

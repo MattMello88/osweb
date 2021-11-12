@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\OsUsuarioController;
+use App\Http\Controllers\OsChamadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('/checkLogin', function (Request $request) {
     return ['Authorization' => 'true'];
   });
+
+  Route::resource('oschamado', OsChamadoController::class)->names('oschamado');
 });
 
 Route::prefix('usuario')->group(function () {

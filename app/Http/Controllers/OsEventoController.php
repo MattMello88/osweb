@@ -14,7 +14,7 @@ class OsEventoController extends Controller
      */
     public function index()
     {
-        //
+      return OsEvento::all();
     }
 
     /**
@@ -25,11 +25,14 @@ class OsEventoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsEvento;
       $data->ID_EVENTO = $request->ID_EVENTO;
       $data->DT_EVENTO = $request->DT_EVENTO;
       $data->DS_EVENTO = $request->DS_EVENTO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
       $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -40,7 +43,7 @@ class OsEventoController extends Controller
      */
     public function show(OsEvento $osEvento)
     {
-        //
+      return $osEvento;
     }
 
     /**
@@ -50,13 +53,15 @@ class OsEventoController extends Controller
      * @param  \App\Models\OsEvento  $osEvento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsEvento $osEvento)
+    public function update(Request $request, OsEvento $data)
     {
       $data->ID_EVENTO = $request->ID_EVENTO;
       $data->DT_EVENTO = $request->DT_EVENTO;
       $data->DS_EVENTO = $request->DS_EVENTO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
       $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -65,8 +70,9 @@ class OsEventoController extends Controller
      * @param  \App\Models\OsEvento  $osEvento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsEvento $osEvento)
+    public function destroy(OsEvento $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

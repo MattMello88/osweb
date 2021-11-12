@@ -14,8 +14,8 @@ class OsContratoImpostoController extends Controller
      */
     public function index()
     {
-      $data->ID_CONTRATO = $request->ID_CONTRATO;
-      $data->ID_IMPOSTO = $request->ID_IMPOSTO;
+      $data = OsContratoImposto::all();
+      return $data;
     }
 
     /**
@@ -26,7 +26,11 @@ class OsContratoImpostoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsContratoImposto;
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->ID_IMPOSTO = $request->ID_IMPOSTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -37,7 +41,7 @@ class OsContratoImpostoController extends Controller
      */
     public function show(OsContratoImposto $osContratoImposto)
     {
-        //
+      return $osContratoImposto;
     }
 
     /**
@@ -47,10 +51,12 @@ class OsContratoImpostoController extends Controller
      * @param  \App\Models\OsContratoImposto  $osContratoImposto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsContratoImposto $osContratoImposto)
+    public function update(Request $request, OsContratoImposto $data)
     {
       $data->ID_CONTRATO = $request->ID_CONTRATO;
       $data->ID_IMPOSTO = $request->ID_IMPOSTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -59,8 +65,9 @@ class OsContratoImpostoController extends Controller
      * @param  \App\Models\OsContratoImposto  $osContratoImposto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsContratoImposto $osContratoImposto)
+    public function destroy(OsContratoImposto $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

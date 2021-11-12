@@ -25,6 +25,7 @@ class OsEmpresaController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsEmpresa;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
       $data->DATACADASTRO = $request->DATACADASTRO;
       $data->DS_SERVIDOR_APLICACAO_PRODUCAO = $request->DS_SERVIDOR_APLICACAO_PRODUCAO;
@@ -51,6 +52,8 @@ class OsEmpresaController extends Controller
       $data->DS_UF = $request->DS_UF;
       $data->ID_SEG_EMP = $request->ID_SEG_EMP;
       $data->ID_BANCO_DADOS = $request->ID_BANCO_DADOS;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -61,7 +64,7 @@ class OsEmpresaController extends Controller
      */
     public function show(OsEmpresa $osEmpresa)
     {
-        //
+        return $osEmpresa;
     }
 
     /**
@@ -71,7 +74,7 @@ class OsEmpresaController extends Controller
      * @param  \App\Models\OsEmpresa  $osEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsEmpresa $osEmpresa)
+    public function update(Request $request, OsEmpresa $data)
     {
       $data->ID_EMPRESA = $request->ID_EMPRESA;
       $data->DATACADASTRO = $request->DATACADASTRO;
@@ -99,6 +102,8 @@ class OsEmpresaController extends Controller
       $data->DS_UF = $request->DS_UF;
       $data->ID_SEG_EMP = $request->ID_SEG_EMP;
       $data->ID_BANCO_DADOS = $request->ID_BANCO_DADOS;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -107,8 +112,9 @@ class OsEmpresaController extends Controller
      * @param  \App\Models\OsEmpresa  $osEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsEmpresa $osEmpresa)
+    public function destroy(OsEmpresa $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

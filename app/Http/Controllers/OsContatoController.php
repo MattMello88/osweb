@@ -14,8 +14,7 @@ class OsContatoController extends Controller
      */
     public function index()
     {
-      $data = OsContato::all();
-      return $data;
+      return OsContato::all();
     }
 
     /**

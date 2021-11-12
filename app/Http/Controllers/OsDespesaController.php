@@ -14,7 +14,8 @@ class OsDespesaController extends Controller
      */
     public function index()
     {
-        //
+      $data = OsDespesa::all();
+      return $data;
     }
 
     /**
@@ -25,11 +26,14 @@ class OsDespesaController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsDespesa;
       $data->ID_DESPESA = $request->ID_DESPESA;
       $data->VALOR = $request->VALOR;
       $data->QUANTIDADE = $request->QUANTIDADE;
       $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
       $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -40,7 +44,7 @@ class OsDespesaController extends Controller
      */
     public function show(OsDespesa $osDespesa)
     {
-        //
+        return $osDespesa;
     }
 
     /**
@@ -50,13 +54,15 @@ class OsDespesaController extends Controller
      * @param  \App\Models\OsDespesa  $osDespesa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsDespesa $osDespesa)
+    public function update(Request $request, OsDespesa $data)
     {
       $data->ID_DESPESA = $request->ID_DESPESA;
       $data->VALOR = $request->VALOR;
       $data->QUANTIDADE = $request->QUANTIDADE;
       $data->ID_APONTAMENTO = $request->ID_APONTAMENTO;
       $data->ID_DESCRITOR_DESPESA = $request->ID_DESCRITOR_DESPESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -65,8 +71,9 @@ class OsDespesaController extends Controller
      * @param  \App\Models\OsDespesa  $osDespesa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsDespesa $osDespesa)
+    public function destroy(OsDespesa $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

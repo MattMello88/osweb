@@ -14,17 +14,8 @@ class OsContratoController extends Controller
      */
     public function index()
     {
-      $data->ID_CONTRATO = $request->ID_CONTRATO;
-      $data->TAXARENOVACAO = $request->TAXARENOVACAO;
-      $data->DISTANCIA = $request->DISTANCIA;
-      $data->INICIO = $request->INICIO;
-      $data->VALORKM = $request->VALORKM;
-      $data->DESCRICAO = $request->DESCRICAO;
-      $data->VALORPEDAGIO = $request->VALORPEDAGIO;
-      $data->VALOR = $request->VALOR;
-      $data->VALORMENSALIDADE = $request->VALORMENSALIDADE;
-      $data->TERMINO = $request->TERMINO;
-      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data = OsContrato::all();
+      return $data;
     }
 
     /**
@@ -35,7 +26,20 @@ class OsContratoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = new OsContrato;
+      $data->ID_CONTRATO = $request->ID_CONTRATO;
+      $data->TAXARENOVACAO = $request->TAXARENOVACAO;
+      $data->DISTANCIA = $request->DISTANCIA;
+      $data->INICIO = $request->INICIO;
+      $data->VALORKM = $request->VALORKM;
+      $data->DESCRICAO = $request->DESCRICAO;
+      $data->VALORPEDAGIO = $request->VALORPEDAGIO;
+      $data->VALOR = $request->VALOR;
+      $data->VALORMENSALIDADE = $request->VALORMENSALIDADE;
+      $data->TERMINO = $request->TERMINO;
+      $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -46,7 +50,7 @@ class OsContratoController extends Controller
      */
     public function show(OsContrato $osContrato)
     {
-        //
+      return $osContrato;
     }
 
     /**
@@ -56,7 +60,7 @@ class OsContratoController extends Controller
      * @param  \App\Models\OsContrato  $osContrato
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsContrato $osContrato)
+    public function update(Request $request, OsContrato $data)
     {
       $data->ID_CONTRATO = $request->ID_CONTRATO;
       $data->TAXARENOVACAO = $request->TAXARENOVACAO;
@@ -69,6 +73,8 @@ class OsContratoController extends Controller
       $data->VALORMENSALIDADE = $request->VALORMENSALIDADE;
       $data->TERMINO = $request->TERMINO;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -77,8 +83,9 @@ class OsContratoController extends Controller
      * @param  \App\Models\OsContrato  $osContrato
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsContrato $osContrato)
+    public function destroy(OsContrato $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }

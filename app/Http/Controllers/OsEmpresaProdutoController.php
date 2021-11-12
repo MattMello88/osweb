@@ -14,7 +14,7 @@ class OsEmpresaProdutoController extends Controller
      */
     public function index()
     {
-        //
+      return OsEmpresaProduto::all();
     }
 
     /**
@@ -25,8 +25,11 @@ class OsEmpresaProdutoController extends Controller
      */
     public function store(Request $request)
     {
+      $data = new OsEmpresaProduto;
       $data->ID_EMPRESA = $request->ID_EMPRESA;
       $data->ID_PRODUTO = $request->ID_PRODUTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -37,7 +40,7 @@ class OsEmpresaProdutoController extends Controller
      */
     public function show(OsEmpresaProduto $osEmpresaProduto)
     {
-        //
+      return $osEmpresaProduto;
     }
 
     /**
@@ -47,10 +50,12 @@ class OsEmpresaProdutoController extends Controller
      * @param  \App\Models\OsEmpresaProduto  $osEmpresaProduto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OsEmpresaProduto $osEmpresaProduto)
+    public function update(Request $request, OsEmpresaProduto $data)
     {
       $data->ID_EMPRESA = $request->ID_EMPRESA;
       $data->ID_PRODUTO = $request->ID_PRODUTO;
+      $data->save();
+      return $data;
     }
 
     /**
@@ -59,8 +64,9 @@ class OsEmpresaProdutoController extends Controller
      * @param  \App\Models\OsEmpresaProduto  $osEmpresaProduto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OsEmpresaProduto $osEmpresaProduto)
+    public function destroy(OsEmpresaProduto $data)
     {
-        //
+      $data->delete();
+      return $data;
     }
 }
