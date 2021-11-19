@@ -39,16 +39,76 @@
     new gridjs.Grid({
       columns: [
         {
-          name: 'ID_CHAMADO',
+          name: 'Status',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Cód.',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Assunto',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Cliente',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Criador',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Responsável',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Dt. Abertura',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Prioridade',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Dt. Entrega',
+          sort: {
+            enabled: true
+          }
+        },{
+          name: 'Des. Resumida',
           sort: {
             enabled: true
           }
         }],
         server: {
           method: "GET",
+          headers: [
+            ["Accept", "application/json"],
+            ["Authorization", "Bearer " + token],
+          ],
           url: url + '/api/oschamado',
           then: data => data.map(oschamado =>
-            [oschamado.ID_CHAMADO]
+            [
+              oschamado.DM_STATUS,
+              oschamado.ID_CHAMADO,
+              oschamado.ID_ASSUNTO,
+              oschamado.ID_EMPRESA,
+              oschamado.ID_CRIADOR,
+              oschamado.ID_RESPONSAVEL,
+              oschamado.DT_ABERTURA,
+              oschamado.NR_PRIORIDADE,
+              oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
+              oschamado.DS_REDUZIDA,
+            ]
           )
         },
       pagination: {

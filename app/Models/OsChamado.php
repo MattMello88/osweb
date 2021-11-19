@@ -10,4 +10,15 @@ class OsChamado extends Model
     use HasFactory;
 
     protected $table = 'os_chamado';
+
+
+    public function phone()
+    {
+        return $this->hasOne(Phone::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
