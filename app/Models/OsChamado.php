@@ -12,13 +12,28 @@ class OsChamado extends Model
     protected $table = 'os_chamado';
 
 
-    public function phone()
+    public function empresa()
     {
-        return $this->hasOne(Phone::class);
+        return $this->hasOne(OsEmpresa::class, 'ID_EMPRESA', 'ID_EMPRESA');
     }
-    
-    public function comments()
+
+    public function assunto()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(OsAssunto::class, 'ID_ASSUNTO', 'ID_ASSUNTO');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class,'ID_USUARIO','ID_RESPONSAVEL');
+    }
+
+    public function produto()
+    {
+        return $this->belongsTo(OsProduto::class, 'ID_PRODUTO', 'ID_PRODUTO');
+    }
+
+    public function previsao()
+    {
+        return $this->belongsTo(OsPrevisaoDeAtendimento::class, 'ID_PREVISAO_DE_ATENTIMENTO', 'PREVISAODEATENDIMENTO_ID_PREVISAO_DE_ATENTIMENTO');
     }
 }

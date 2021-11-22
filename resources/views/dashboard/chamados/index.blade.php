@@ -100,8 +100,8 @@
             [
               oschamado.DM_STATUS,
               oschamado.ID_CHAMADO,
-              oschamado.ID_ASSUNTO,
-              oschamado.ID_EMPRESA,
+              oschamado.assunto.DS_ASSUNTO,
+              oschamado.empresa.NM_FANTASIA,
               oschamado.ID_CRIADOR,
               oschamado.ID_RESPONSAVEL,
               oschamado.DT_ABERTURA,

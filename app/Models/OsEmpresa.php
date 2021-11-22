@@ -10,4 +10,6 @@ class OsEmpresa extends Model
     use HasFactory;
 
     protected $table = 'os_empresa';
+
+    protected $primaryKey = 'id_empresa';
 }
