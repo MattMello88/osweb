@@ -14,8 +14,7 @@ class OsChamadoController extends Controller
      */
     public function index(Request $request)
     {
-      //$books = Book::with(['author', 'publisher'])->get();
-      $data = OsChamado::where('DM_STATUS','0')->with(['empresa', 'assunto', 'usuario', 'produto', 'previsao'])->get();
+      $data = OsChamado::where(['DM_STATUS' => '0', 'ID_RESPONSAVEL' => $request->user()->ID_USUARIO])->with(['empresa', 'assunto', 'usuario', 'produto', 'previsao', 'criador'])->get();
       return $data;
     }
 

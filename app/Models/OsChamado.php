@@ -24,7 +24,12 @@ class OsChamado extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class,'ID_USUARIO','ID_RESPONSAVEL');
+        return $this->belongsTo(User::class,'ID_RESPONSAVEL','ID_USUARIO');
+    }
+
+    public function criador()
+    {
+        return $this->belongsTo(User::class,'ID_CRIADOR','ID_USUARIO');
     }
 
     public function produto()
@@ -34,6 +39,6 @@ class OsChamado extends Model
 
     public function previsao()
     {
-        return $this->belongsTo(OsPrevisaoDeAtendimento::class, 'ID_PREVISAO_DE_ATENTIMENTO', 'PREVISAODEATENDIMENTO_ID_PREVISAO_DE_ATENTIMENTO');
+        return $this->belongsTo(OsPrevisaoDeAtendimento::class, 'PREVISAODEATENDIMENTO_ID_PREVISAO_DE_ATENTIMENTO', 'ID_PREVISAO_DE_ATENTIMENTO');
     }
 }

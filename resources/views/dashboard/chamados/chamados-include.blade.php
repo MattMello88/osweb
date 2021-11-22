@@ -25,7 +25,7 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                <form class="row g-3">
+                <form class="row g-3" action="{{url('/api/oschamado')}}" method="GET" id="formOsChamadoFiltro">
 
                   <div class="row col-12 pt-2">
                     <div class="col-sm-12 col-md-12">

@@ -43,55 +43,117 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.gridjs = require('gridjs');
 
 window.setCookie = function (cname, cvalue, exdays){
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
-  window.getCookie = function (cname) {
-    let name = cname + "=";
-    let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+window.getCookie = function (cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
   }
+  return "";
+}
 
-  window.checkLogin = function() {
-    let token = getCookie("token");
+window.checkLogin = function() {
+  let token = getCookie("token");
 
-    fetch(url+'/api/checkLogin', {
-      method: "GET",
-      headers: [
-        ["Accept", "application/json"],
-        ["Authorization", "Bearer " + token],
-      ]
-    })
-    .then(function(res){
-      return res.json();
-    })
-    .then(function(data) {
-      if (data.Authorization !== undefined){
-        if (data.Authorization !== 'true'){
-          window.location = url + '/';
-        }
-      } else {
+  fetch(url+'/api/checkLogin', {
+    method: "GET",
+    headers: [
+      ["Accept", "application/json"],
+      ["Authorization", "Bearer " + token],
+    ]
+  })
+  .then(function(res){
+    return res.json();
+  })
+  .then(function(data) {
+    if (data.Authorization !== undefined){
+      if (data.Authorization !== 'true'){
         window.location = url + '/';
       }
-    })
-    .catch(function(err){
+    } else {
       window.location = url + '/';
-    });
+    }
+  })
+  .catch(function(err){
+    window.location = url + '/';
+  });
 
+}
+
+window.doLogout = function(event){
+    setCookie('token', null, 0);
+}
+
+window.sendData = function(form, success, error, token = ''){
+  var formData = new FormData();
+  for (var i = 0; i < form.length; ++i) {
+    formData.append(form[i].name, form[i].value);
   }
 
-  window.doLogout = function(event){
-      setCookie('token', null, 0);
+  let headers = [];
+
+  if (token == ''){
+    headers = [
+      ["Accept", "application/json"],
+    ];
+  } else {
+    headers = [
+      ["Accept", "application/json"],
+      ["Authorization", "Bearer " + token],
+    ];
   }
+
+  fetch(form.action, {
+    method: form.method.toUpperCase(),
+    headers: headers,
+    body: formData
+  })
+  .then(function(res){
+    return res.json();
+  })
+  .then(success)
+  .catch(error);
+}
+
+
+window.gridData = function(form, columns, result, limit = 20, search = false){
+  let token = getCookie("token");
+
+  var formData = new FormData();
+  for (var i = 0; i < form.length; ++i) {
+    formData.append(form[i].name, form[i].value);
+  }
+
+  let headers = [
+    ["Accept", "application/json"],
+    ["Authorization", "Bearer " + token],
+  ];
+
+  new gridjs.Grid({
+    columns: columns,
+      server: {
+        method: form.method.toUpperCase(),
+        headers: headers,
+        url: form.action,
+        then: result
+      },
+    pagination: {
+      limit: limit,
+    },
+    search: {
+      enabled: search
+    }
+  }).render(document.getElementById("wrapper"));
+}

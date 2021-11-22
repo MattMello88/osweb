@@ -28,8 +28,8 @@
 
 @section('content')
   <div class="tab-content" id="myTabContent">
-    @include('dashboard.chamados.chamados')
-    @include('dashboard.chamados.tramites')
+    @include('dashboard.chamados.chamados-include')
+    @include('dashboard.chamados.tramites-include')
   </div>
 @endsection
 
@@ -50,9 +50,6 @@
           }
         },{
           name: 'Assunto',
-          sort: {
-            enabled: true
-          }
         },{
           name: 'Cliente',
           sort: {
@@ -60,14 +57,8 @@
           }
         },{
           name: 'Criador',
-          sort: {
-            enabled: true
-          }
         },{
           name: 'Responsável',
-          sort: {
-            enabled: true
-          }
         },{
           name: 'Dt. Abertura',
           sort: {
@@ -85,9 +76,6 @@
           }
         },{
           name: 'Des. Resumida',
-          sort: {
-            enabled: true
-          }
         }],
         server: {
           method: "GET",
@@ -102,33 +90,26 @@
               oschamado.ID_CHAMADO,
               oschamado.assunto.DS_ASSUNTO,
               oschamado.empresa.NM_FANTASIA,
-              oschamado.ID_CRIADOR,
-              oschamado.ID_RESPONSAVEL,
+              oschamado.criador.NM_USUARIO,
+              oschamado.usuario.NM_USUARIO,
               oschamado.DT_ABERTURA,
-              oschamado.NR_PRIORIDADE,
+              oschamado.NR_PRIORIDADE  == '2' ? 'Alta': oschamado.NR_PRIORIDADE == '1' ? 'Média' : 'Baixa',
               oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
               oschamado.DS_REDUZIDA,
             ]
           )
         },
       pagination: {
-        limit: 15,
+        limit: 20,
       },
       search: {
         enabled: true
-      },
-      data: [
-        ["John", "john@example.com", "(353) 01 222 3333"],
-        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
-        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
-        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
-        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
-        ["John", "john@example.com", "(353) 01 222 3333"],
-        ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
-        ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
-        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
-        ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
-      ]
+      }
     }).render(document.getElementById("wrapper"));
+
+
+    document.getElementById('formOsChamadoFiltro').addEventListener('submit', function(event){
+      //gridData('')
+    });
   </script>
 @endsection
