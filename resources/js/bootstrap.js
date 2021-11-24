@@ -127,33 +127,64 @@ window.sendData = function(form, success, error, token = ''){
   .catch(error);
 }
 
+window.getData = function(form, success, error, token = ''){
 
-window.gridData = function(form, columns, result, limit = 20, search = false){
-  let token = getCookie("token");
-
-  var formData = new FormData();
+  var url = '?';
   for (var i = 0; i < form.length; ++i) {
-    formData.append(form[i].name, form[i].value);
+    if (form[i].value !== ''){
+      if (!form[i].value.includes('Selecione')){
+        url = url + form[i].name +'='+ form[i].value + '&';
+      }
+    }
+  }
+  url = url.substring(0, url.length - 1);
+
+  let headers = [];
+
+  if (token == ''){
+    headers = [
+      ["Accept", "application/json"],
+    ];
+  } else {
+    headers = [
+      ["Accept", "application/json"],
+      ["Authorization", "Bearer " + token],
+    ];
   }
 
-  let headers = [
-    ["Accept", "application/json"],
-    ["Authorization", "Bearer " + token],
-  ];
+  fetch(form.action + url, {
+    method: "GET",
+    headers: headers
+  })
+  .then(function(res){
+    return res.json();
+  })
+  .then(success)
+  .catch(error);
+}
 
-  new gridjs.Grid({
-    columns: columns,
-      server: {
-        method: form.method.toUpperCase(),
-        headers: headers,
-        url: form.action,
-        then: result
-      },
-    pagination: {
-      limit: limit,
+
+window.gridData = function(form, columns, result, renderTo, limit = 20, search = false){
+  let token = getCookie("token");
+
+
+  getData(form,
+    function(data){
+      //console.log(data);
+      const grid = new gridjs.Grid({
+        columns: columns,
+        data: result(data),
+        pagination: {
+          limit: 10,
+        },
+      });
+      grid.render(renderTo);
     },
-    search: {
-      enabled: search
-    }
-  }).render(document.getElementById("wrapper"));
+    function(err){
+      console.log(err)
+    },
+    token
+  );
+
+
 }

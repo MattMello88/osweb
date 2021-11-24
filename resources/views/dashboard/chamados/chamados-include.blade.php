@@ -29,49 +29,48 @@
 
                   <div class="row col-12 pt-2">
                     <div class="col-sm-12 col-md-12">
-                      <label for="inputEmail4" class="form-label">Código</label>
-                      <input type="number" class="form-control form-control-sm" id="inputEmail4">
+                      <label for="inputCodigo" class="form-label">Código</label>
+                      <input type="number" class="form-control form-control-sm" id="inputCodigo" name="ID_CHAMADO">
                     </div>
                   </div>
                   <div class="row col-12 pt-2">
                     <div class="col-sm-12 col-md-6">
-                      <label for="inputAddress" class="form-label">Data Abertura</label>
-                      <input type="date" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
+                      <label for="inputDtAbertura" class="form-label">Data Abertura</label>
+                      <input type="date" class="form-control form-control-sm" id="inputDtAbertura" name="DT_ABERTURA">
                     </div>
 
                     <div class="col-sm-12 col-md-6">
-                      <label for="inputAddress2" class="form-label">Data Final Abertura</label>
-                      <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                      <label for="inputDtFinal" class="form-label">Data Final Abertura</label>
+                      <input type="date" class="form-control form-control-sm" id="inputDtFinal" name="DT_ENCERRAMENTO">
                     </div>
                   </div>
 
                   <div class="row col-12 pt-2">
                     <div class="col-sm-12 col-md-4 col-lg-2">
-                      <label for="inputCity" class="form-label">Status</label>
-                      <select id="inputState" class="form-select form-select-sm">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                      <label for="inputStatus" class="form-label">Status</label>
+                      <select id="inputStatus" class="form-select form-select-sm" name="DM_STATUS">
+                        <option selected>Selecione Status</option>
+                        <option value="0">Não Iniciado</option>
+                        <option value="1">Iniciado</option>
+                        <option value="2">Encerrado</option>
                       </select>
                     </div>
                     <div class="col-sm-12 col-md-8 col-lg-5">
-                      <label for="inputState" class="form-label">Empresa</label>
-                      <select id="inputState" class="form-select form-select-sm">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                      <label for="inputEmpresa" class="form-label">Empresa</label>
+                      <select id="inputEmpresa" class="form-select form-select-sm" name="ID_EMPRESA">
+                        <option selected>Selecione uma Empresa</option>
                       </select>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-3">
-                      <label for="inputState" class="form-label">Produto</label>
-                      <select id="inputState" class="form-select form-select-sm">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                      <label for="inputProduto" class="form-label">Produto</label>
+                      <select id="inputProduto" class="form-select form-select-sm" name="ID_PRODUTO">
+                        <option selected>Selecione um Produo</option>
                       </select>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-2">
-                      <label for="inputState" class="form-label">Assunto</label>
-                      <select id="inputState" class="form-select form-select-sm">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                      <label for="inputAssunto" class="form-label">Assunto</label>
+                      <select id="inputAssunto" class="form-select form-select-sm" name="ID_ASSUNTO">
+                        <option selected>Selecione um Assunto</option>
                       </select>
                     </div>
                   </div>

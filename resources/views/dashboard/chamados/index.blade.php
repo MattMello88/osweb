@@ -36,7 +36,7 @@
 
 @section('script')
 <script>
-    new gridjs.Grid({
+    /*new gridjs.Grid({
       columns: [
         {
           name: 'Status',
@@ -99,17 +99,89 @@
             ]
           )
         },
+      style: {
+        table: {
+          'white-space': 'nowrap'
+        }
+      },
       pagination: {
         limit: 20,
       },
       search: {
         enabled: true
       }
-    }).render(document.getElementById("wrapper"));
+    }).render(document.getElementById("wrapper")); */
 
 
     document.getElementById('formOsChamadoFiltro').addEventListener('submit', function(event){
-      //gridData('')
+      event.preventDefault();
+      document.getElementById("wrapper").innerHTML = "";
+
+      gridData(
+        document.getElementById('formOsChamadoFiltro'),
+        [
+          {
+            name: 'Status',
+            sort: {
+              enabled: true
+            }
+          },{
+            name: 'Cód.',
+            sort: {
+              enabled: true
+            }
+          },{
+            name: 'Assunto',
+          },{
+            name: 'Cliente',
+            sort: {
+              enabled: true
+            }
+          },{
+            name: 'Criador',
+          },{
+            name: 'Responsável',
+          },{
+            name: 'Dt. Abertura',
+            sort: {
+              enabled: true
+            }
+          },{
+            name: 'Prioridade',
+            sort: {
+              enabled: true
+            }
+          },{
+            name: 'Dt. Entrega',
+            sort: {
+              enabled: true
+            }
+          },{
+            name: 'Des. Resumida',
+          }
+        ],
+        function (data) {
+          console.log(data);
+          return data => data.map(oschamado =>
+            [
+              oschamado.DM_STATUS,
+              oschamado.ID_CHAMADO,
+              oschamado.assunto.DS_ASSUNTO,
+              oschamado.empresa.NM_FANTASIA,
+              oschamado.criador.NM_USUARIO,
+              oschamado.usuario.NM_USUARIO,
+              oschamado.DT_ABERTURA,
+              oschamado.NR_PRIORIDADE  == '2' ? 'Alta': oschamado.NR_PRIORIDADE == '1' ? 'Média' : 'Baixa',
+              oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
+              oschamado.DS_REDUZIDA,
+            ]
+          )
+        },
+
+        document.getElementById("wrapper"),
+        10,
+        false
+      )
     });
   </script>
 @endsection
