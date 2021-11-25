@@ -162,7 +162,7 @@
         ],
         function (data) {
           console.log(data);
-          return data => data.map(oschamado =>
+          return data.map(oschamado =>
             [
               oschamado.DM_STATUS,
               oschamado.ID_CHAMADO,

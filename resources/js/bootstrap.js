@@ -175,10 +175,17 @@ window.gridData = function(form, columns, result, renderTo, limit = 20, search =
         columns: columns,
         data: result(data),
         pagination: {
-          limit: 10,
+          limit: limit,
         },
-      });
-      grid.render(renderTo);
+        search: search,
+        authoWidth: true,
+        fixedHeader: true,
+        height: '400px',
+      }).render(renderTo);
+      grid.updateConfig({
+        search: search,
+        data: result(data),
+      }).forceRender();
     },
     function(err){
       console.log(err)
