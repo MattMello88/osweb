@@ -127,7 +127,7 @@ window.sendData = function(form, success, error, token = ''){
   .catch(error);
 }
 
-window.getData = function(form, success, error, token = ''){
+window.getDataByForm = function(form, success, error, token = ''){
 
   var url = '?';
   for (var i = 0; i < form.length; ++i) {
@@ -164,13 +164,12 @@ window.getData = function(form, success, error, token = ''){
 }
 
 
-window.gridData = function(form, columns, result, renderTo, limit = 20, search = false){
+window.gridDataByForm = function(form, columns, result, renderTo, limit = 20, search = false){
   let token = getCookie("token");
 
 
-  getData(form,
+  getDataByForm(form,
     function(data){
-      //console.log(data);
       const grid = new gridjs.Grid({
         columns: columns,
         data: result(data),

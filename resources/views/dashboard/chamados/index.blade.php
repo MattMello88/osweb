@@ -117,18 +117,35 @@
       event.preventDefault();
       document.getElementById("wrapper").innerHTML = "";
 
-      gridData(
+      gridDataByForm(
         document.getElementById('formOsChamadoFiltro'),
         [
           {
             name: 'Status',
             sort: {
               enabled: true
+            },
+            formatter: (cell, row) => {
+              return gridjs.html(
+                `<span
+                    class='badge rounded-pill bg-${((cell == '0') ? 'secondary' : (cell == '1') ? 'primary' : 'success')}'
+                    data-bs-toggle='tooltip'
+                    data-bs-html='true'
+                    title='${((cell == '0') ? 'Não Iniciada' : (cell == '1') ? 'Iniciada' : 'Encerrada')}'
+                  >${((cell == '0') ? 'n' : (cell == '1') ? 'i' : 'e')}
+                  </span>`
+              );
             }
           },{
             name: 'Cód.',
             sort: {
               enabled: true
+            },
+            formatter: (cell, row) => {
+              return gridjs.h('a', {
+                className: 'link-primary',
+                href: `${url}/dashboard/chamado/${cell}`,
+              }, 'Editar');
             }
           },{
             name: 'Assunto',
