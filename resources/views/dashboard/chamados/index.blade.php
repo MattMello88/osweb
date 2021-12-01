@@ -3,202 +3,105 @@
 @section('title', 'Chamados')
 
 @section('sub-nav')
-      <header>
-        <div class="bg-info text-white shadow" id="myTab" role="tablist">
-          <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-              <ul class="nav nav-pills col-12 col-lg-auto justify-content-center text-small">
-                <li>
-                  <a href="#" class="nav-link active" id="chamados-tab" data-bs-toggle="tab" data-bs-target="#chamados" type="button" role="tab" aria-controls="chamados" aria-selected="true">
-                    Chamados
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link" id="tramites-tab" data-bs-toggle="tab" data-bs-target="#tramites" type="button" role="tab" aria-controls="tramites" aria-selected="false">
-                    Tramites
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </header>
+  @include('layouts.sub-nav-chamado-include')
 @endsection
 
 @section('content')
-  <div class="tab-content" id="myTabContent">
-    @include('dashboard.chamados.chamados-include')
-    @include('dashboard.chamados.tramites-include')
+  <div class="tab-content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Chamados</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-file-text" style="font-size: 1.1rem;"></i>
+            Novo
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-file-pdf" style="font-size: 1.1rem;"></i>
+            Relatório
+            <span data-feather="calendar"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Filtro
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body bg-white">
+            <form class="row g-3" action="{{url('/api/oschamado')}}" method="GET" id="formOsChamadoFiltro">
+
+              <div class="row col-12 pt-2">
+                <div class="col-sm-12 col-md-12">
+                  <label for="inputCodigo" class="form-label">Código</label>
+                  <input type="number" class="form-control form-control-sm" id="inputCodigo" name="ID_CHAMADO">
+                </div>
+              </div>
+              <div class="row col-12 pt-2">
+                <div class="col-sm-12 col-md-6">
+                  <label for="inputDtAbertura" class="form-label">Data Abertura</label>
+                  <input type="date" class="form-control form-control-sm" id="inputDtAbertura" name="DT_ABERTURA">
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                  <label for="inputDtFinal" class="form-label">Data Final Abertura</label>
+                  <input type="date" class="form-control form-control-sm" id="inputDtFinal" name="DT_ENCERRAMENTO">
+                </div>
+              </div>
+
+              <div class="row col-12 pt-2">
+                <div class="col-sm-12 col-md-4 col-lg-2">
+                  <label for="inputStatus" class="form-label">Status</label>
+                  <select id="inputStatus" class="form-select form-select-sm" name="DM_STATUS">
+                    <option selected>Selecione Status</option>
+                    <option value="0">Não Iniciado</option>
+                    <option value="1">Iniciado</option>
+                    <option value="2">Encerrado</option>
+                  </select>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-5">
+                  <label for="inputEmpresa" class="form-label">Empresa</label>
+                  <select id="inputEmpresa" class="form-select form-select-sm" name="ID_EMPRESA">
+                    <option selected>Selecione uma Empresa</option>
+                  </select>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <label for="inputProduto" class="form-label">Produto</label>
+                  <select id="inputProduto" class="form-select form-select-sm" name="ID_PRODUTO">
+                    <option selected>Selecione um Produo</option>
+                  </select>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-2">
+                  <label for="inputAssunto" class="form-label">Assunto</label>
+                  <select id="inputAssunto" class="form-select form-select-sm" name="ID_ASSUNTO">
+                    <option selected>Selecione um Assunto</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-5" id="wrapper"></div>
+
   </div>
 @endsection
 
 
 @section('script')
 <script>
-    /*new gridjs.Grid({
-      columns: [
-        {
-          name: 'Status',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Cód.',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Assunto',
-        },{
-          name: 'Cliente',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Criador',
-        },{
-          name: 'Responsável',
-        },{
-          name: 'Dt. Abertura',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Prioridade',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Dt. Entrega',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Des. Resumida',
-        }],
-        server: {
-          method: "GET",
-          headers: [
-            ["Accept", "application/json"],
-            ["Authorization", "Bearer " + token],
-          ],
-          url: url + '/api/oschamado',
-          then: data => data.map(oschamado =>
-            [
-              oschamado.DM_STATUS,
-              oschamado.ID_CHAMADO,
-              oschamado.assunto.DS_ASSUNTO,
-              oschamado.empresa.NM_FANTASIA,
-              oschamado.criador.NM_USUARIO,
-              oschamado.usuario.NM_USUARIO,
-              oschamado.DT_ABERTURA,
-              oschamado.NR_PRIORIDADE  == '2' ? 'Alta': oschamado.NR_PRIORIDADE == '1' ? 'Média' : 'Baixa',
-              oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
-              oschamado.DS_REDUZIDA,
-            ]
-          )
-        },
-      style: {
-        table: {
-          'white-space': 'nowrap'
-        }
-      },
-      pagination: {
-        limit: 20,
-      },
-      search: {
-        enabled: true
-      }
-    }).render(document.getElementById("wrapper")); */
-
-
-    document.getElementById('formOsChamadoFiltro').addEventListener('submit', function(event){
-      event.preventDefault();
-      document.getElementById("wrapper").innerHTML = "";
-
-      gridDataByForm(
-        document.getElementById('formOsChamadoFiltro'),
-        [
-          {
-            name: 'Status',
-            sort: {
-              enabled: true
-            },
-            formatter: (cell, row) => {
-              return gridjs.html(
-                `<span
-                    class='badge rounded-pill bg-${((cell == '0') ? 'secondary' : (cell == '1') ? 'primary' : 'success')}'
-                    data-bs-toggle='tooltip'
-                    data-bs-html='true'
-                    title='${((cell == '0') ? 'Não Iniciada' : (cell == '1') ? 'Iniciada' : 'Encerrada')}'
-                  >${((cell == '0') ? 'n' : (cell == '1') ? 'i' : 'e')}
-                  </span>`
-              );
-            }
-          },{
-            name: 'Cód.',
-            sort: {
-              enabled: true
-            },
-            formatter: (cell, row) => {
-              return gridjs.h('a', {
-                className: 'link-primary',
-                href: `${url}/dashboard/chamado/${cell}`,
-              }, 'Editar');
-            }
-          },{
-            name: 'Assunto',
-          },{
-            name: 'Cliente',
-            sort: {
-              enabled: true
-            }
-          },{
-            name: 'Criador',
-          },{
-            name: 'Responsável',
-          },{
-            name: 'Dt. Abertura',
-            sort: {
-              enabled: true
-            }
-          },{
-            name: 'Prioridade',
-            sort: {
-              enabled: true
-            }
-          },{
-            name: 'Dt. Entrega',
-            sort: {
-              enabled: true
-            }
-          },{
-            name: 'Des. Resumida',
-          }
-        ],
-        function (data) {
-          console.log(data);
-          return data.map(oschamado =>
-            [
-              oschamado.DM_STATUS,
-              oschamado.ID_CHAMADO,
-              oschamado.assunto.DS_ASSUNTO,
-              oschamado.empresa.NM_FANTASIA,
-              oschamado.criador.NM_USUARIO,
-              oschamado.usuario.NM_USUARIO,
-              oschamado.DT_ABERTURA,
-              oschamado.NR_PRIORIDADE  == '2' ? 'Alta': oschamado.NR_PRIORIDADE == '1' ? 'Média' : 'Baixa',
-              oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
-              oschamado.DS_REDUZIDA,
-            ]
-          )
-        },
-
-        document.getElementById("wrapper"),
-        10,
-        false
-      )
-    });
-  </script>
+  pgChamados.Chamados();
+</script>
 @endsection

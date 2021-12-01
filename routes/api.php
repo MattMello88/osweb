@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\OsUsuarioController;
 use App\Http\Controllers\OsChamadoController;
+use App\Http\Controllers\OsEmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
   });
 
   Route::resource('oschamado', OsChamadoController::class)->names('oschamado');
+  Route::resource('osempresa', OsEmpresaController::class)->names('osempresa');
 });
 
 Route::prefix('usuario')->group(function () {

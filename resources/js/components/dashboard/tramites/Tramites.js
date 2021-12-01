@@ -1,0 +1,5 @@
+const Tramites = () => {
+
+}
+
+export {Tramites};

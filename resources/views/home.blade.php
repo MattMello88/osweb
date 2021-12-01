@@ -90,7 +90,7 @@
   </main>
   <script src="{{ url('js/app.js') }}"></script>
   <script>
-    doLogout();
+    auth.doLogout();
     var formSubmitLogin = function(event){
       event.preventDefault();
       var form = document.getElementById('formSubmitLogin');
@@ -124,8 +124,8 @@
           var myToast = new Bootstrap.Toast(myToastEl)
           myToast.show();
         } else {
-          setCookie('token', data.token);
-          setCookie('usuario', data.usuario);
+          auth.setCookie('token', data.token);
+          auth.setCookie('usuario', data.usuario);
           window.location = url + '/dashboard';
         }
 

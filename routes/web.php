@@ -54,7 +54,11 @@ Route::prefix('dashboard')->group(function () {
   });
 
   Route::get('/chamados', function () {
-      return view('dashboard/chamados/index');
+      return view('dashboard/chamados/index', ['view' => 'chamados']);
+  });
+
+  Route::get('/tramites', function () {
+    return view('dashboard/tramites/index', ['view' => 'tramites']);
   });
 
   Route::get('/relatorios', function () {
