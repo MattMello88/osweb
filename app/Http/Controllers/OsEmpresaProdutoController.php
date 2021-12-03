@@ -12,9 +12,9 @@ class OsEmpresaProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      return OsEmpresaProduto::all();
+      return OsEmpresaProduto::where(['ID_EMPRESA' => $request->ID_EMPRESA])->with(['empresa', 'produto'])->get();;
     }
 
     /**

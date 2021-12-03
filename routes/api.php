@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OsUsuarioController;
 use App\Http\Controllers\OsChamadoController;
 use App\Http\Controllers\OsEmpresaController;
+use App\Http\Controllers\OsEmpresaProdutoController;
+use App\Http\Controllers\OsAssuntoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
   Route::resource('oschamado', OsChamadoController::class)->names('oschamado');
   Route::resource('osempresa', OsEmpresaController::class)->names('osempresa');
+  Route::resource('osempresaproduto', OsEmpresaProdutoController::class)->names('osempresaproduto');
+  Route::resource('osassunto', OsAssuntoController::class)->names('osassunto');
 });
 
 Route::prefix('usuario')->group(function () {

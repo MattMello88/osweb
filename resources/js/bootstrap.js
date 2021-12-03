@@ -1,6 +1,6 @@
 window._ = require('lodash');
 
-window.auth = require('./auth');
+window.auth = require('./hooks');
 window.pgChamados = require('./components/dashboard/chamados');
 
 /**

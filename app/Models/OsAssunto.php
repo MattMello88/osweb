@@ -10,4 +10,9 @@ class OsAssunto extends Model
     use HasFactory;
 
     protected $table = 'os_assunto';
+
+    public function produto()
+    {
+        return $this->hasOne(OsProduto::class, 'ID_PRODUTO', 'ID_PRODUTO');
+    }
 }

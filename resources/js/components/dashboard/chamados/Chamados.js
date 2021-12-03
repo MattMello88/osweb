@@ -1,37 +1,70 @@
 import {gridDataByForm} from '../../requests';
-import {getCookie} from '../../../auth';
+import {EmpresaProdutos, Empresas, AssuntoByProduto} from '../../../hooks';
 
 const Chamados = () => {
 
-  let token = getCookie("token");
-
   const getSeletEmpresa = () => {
-    const headers = [
-      ["Accept", "application/json"],
-      ["Authorization", "Bearer " + token],
-    ];
+    let dropdown;
+    let option;
+    let data;
 
-    fetch(url + '/api/osempresa', {
-      method: "GET",
-      headers: headers
-    })
-    .then(function(res){
-      return res.json();
-    })
-    .then(function(data){
-      let dropdown = document.getElementById("inputEmpresa");
-      let option;
-      for (let i = 0; i < data.length; i++) {
-        option = document.createElement('option');
-        option.text = data[i].NM_RAZAO_SOCIAL;
-        option.value  = data[i].ID_EMPRESA;
-        dropdown.add(option);
-      }
-      dropdown.selectedIndex = 0;
-    })
-    .catch(function(err){
-      console.log(err)
-    });
+    if (!sessionStorage.getItem("dataEmpresas")){
+      data = Empresas();
+      sessionStorage.setItem("dataEmpresas", data)
+    } else {
+      data = sessionStorage.getItem("dataEmpresas");
+    }
+
+    dropdown = document.getElementById("inputEmpresa");
+    for (let i = 0; i < data.length; i++) {
+      option = document.createElement('option');
+      option.text = data[i].NM_RAZAO_SOCIAL;
+      option.value  = data[i].ID_EMPRESA;
+      dropdown.add(option);
+    }
+    dropdown.selectedIndex = 0;
+  }
+
+  const getProduto = async (event) => {
+    let ID_EMPRESA = event.target.value;
+
+    let data = await EmpresaProdutos(ID_EMPRESA);
+
+    let dropdown = document.getElementById("inputProduto");
+    dropdown.options.length = 0;
+    let option;
+    option = document.createElement('option');
+    option.text = 'Selecione um Produto';
+    dropdown.add(option);
+
+    for (let i = 0; i < data.length; i++) {
+      option = document.createElement('option');
+      option.text = data[i].produto.NM_PRODUTO;
+      option.value  = data[i].produto.ID_PRODUTO;
+      dropdown.add(option);
+    }
+    dropdown.selectedIndex = 0;
+  }
+
+  const getAssunto = (event) => {
+    let ID_PRODUTO = event.target.value;
+
+    let data = AssuntoByProduto(ID_PRODUTO);
+
+    let dropdown = document.getElementById("inputAssunto");
+    dropdown.options.length = 0;
+    let option;
+    option = document.createElement('option');
+    option.text = 'Selecione um Assunto';
+    dropdown.add(option);
+
+    for (let i = 0; i < data.length; i++) {
+      option = document.createElement('option');
+      option.text = data[i].DS_ASSUNTO;
+      option.value  = data[i].ID_ASSUNTO;
+      dropdown.add(option);
+    }
+    dropdown.selectedIndex = 0;
   }
 
   const loadChamados = () => {
@@ -129,6 +162,8 @@ const Chamados = () => {
   window.addEventListener('load', loadChamados);
 
   document.getElementById('formOsChamadoFiltro').addEventListener('submit', submit);
+  document.getElementById('inputEmpresa').addEventListener('change', getProduto);
+  document.getElementById('inputProduto').addEventListener('change', getAssunto);
 
 }
 

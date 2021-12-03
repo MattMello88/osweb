@@ -12,9 +12,9 @@ class OsAssuntoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $data = OsAssunto::all();
+      $data = OsAssunto::where(['ID_PRODUTO' => $request->ID_PRODUTO])->get();
       return $data;
     }
 

@@ -9,7 +9,8 @@
         <h1 class="h2">Chamado {{$id}}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <a href="{{url('chamados')}}" rule="button" class="btn btn-outline-secondary">
+
+            <a href="javascript:history.back()" rule="button" class="btn btn-outline-secondary">
               <i class="bi bi-arrow-left-square" style="font-size: 1.1rem;"></i>
               Voltar
             </a>
