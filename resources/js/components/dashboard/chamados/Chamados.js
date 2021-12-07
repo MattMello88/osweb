@@ -1,78 +1,189 @@
 import {gridDataByForm} from '../../requests';
-import {EmpresaProdutos, Empresas, AssuntoByProduto} from '../../../hooks';
+import {EmpresaProdutos, Empresas, AssuntosByProduto} from '../../../hooks';
 
 const Chamados = () => {
 
-  const getSeletEmpresa = () => {
-    let dropdown;
-    let option;
-    let data;
+  const createSelect = (selectText, idInput, data, fieldText, fieldValue, sessionId) => {
+    let dropdown = document.getElementById(idInput);
+    dropdown.options.length = 0;
 
-    if (!sessionStorage.getItem("dataEmpresas")){
-      data = Empresas();
-      sessionStorage.setItem("dataEmpresas", data)
-    } else {
-      data = sessionStorage.getItem("dataEmpresas");
-    }
+    let option = document.createElement('option');
+    option.text = selectText;
+    dropdown.add(option);
 
-    dropdown = document.getElementById("inputEmpresa");
     for (let i = 0; i < data.length; i++) {
       option = document.createElement('option');
-      option.text = data[i].NM_RAZAO_SOCIAL;
-      option.value  = data[i].ID_EMPRESA;
+      if (fieldText.includes('.')){
+        let campos;
+        campos = fieldText.split('.');
+        option.text = data[i][campos[0]][campos[1]];
+        campos = fieldValue.split('.');
+        option.value  = data[i][campos[0]][campos[1]];
+      } else {
+        option.text = data[i][fieldText];
+        option.value  = data[i][fieldValue];
+      }
+
       dropdown.add(option);
     }
-    dropdown.selectedIndex = 0;
+
+    if (sessionStorage.getItem(sessionId))
+      dropdown.value = sessionStorage.getItem(sessionId);
+    else
+      dropdown.selectedIndex = 0;
+  }
+
+  const startSelects = async () => {
+    let data
+
+    if (sessionStorage.getItem("selectID_CHAMADO")){
+      document.getElementById('inputCodigo').value = sessionStorage.getItem("selectID_CHAMADO");
+    }
+
+    if (sessionStorage.getItem("selectDT_ABERTURA")){
+      document.getElementById('inputDtAbertura').value = sessionStorage.getItem("selectDT_ABERTURA");
+    }
+
+    if (sessionStorage.getItem("selectDT_ENCERRAMENTO")){
+      document.getElementById('inputDtFinal').value = sessionStorage.getItem("selectDT_ENCERRAMENTO");
+    }
+
+    if (sessionStorage.getItem("selectDM_STATUS")){
+      document.getElementById('inputStatus').value = sessionStorage.getItem("selectDM_STATUS");
+    } else {
+      document.getElementById('inputStatus').selectedIndex = 1;
+    }
+
+    if (sessionStorage.getItem("selectID_EMPRESA")){
+      data = await Empresas();
+
+      createSelect(
+        "Selecione uma Empresa",
+        "inputEmpresa",
+        data,
+        "NM_RAZAO_SOCIAL",
+        "ID_EMPRESA",
+        "selectID_EMPRESA");
+
+      let ID_EMPRESA = sessionStorage.getItem("selectID_EMPRESA");
+      data = await EmpresaProdutos(ID_EMPRESA);
+
+      createSelect(
+        "Selecione um Produto",
+        "inputProduto",
+        data,
+        "produto.NM_PRODUTO",
+        "produto.ID_PRODUTO",
+        "selectID_PRODUTO");
+
+      if (sessionStorage.getItem("selectID_PRODUTO")){
+
+
+        let ID_PRODUTO = sessionStorage.getItem("selectID_PRODUTO");
+        data = await AssuntosByProduto(ID_PRODUTO);
+
+        createSelect(
+          "Selecione um Assunto",
+          "inputAssunto",
+          data,
+          "DS_ASSUNTO",
+          "ID_ASSUNTO",
+          "selectID_ASSUNTO");
+      }
+
+    } else {
+      getSeletEmpresa();
+    }
+
+    submit();
+  }
+
+  const getSeletEmpresa = async () => {
+    let data;
+
+    data = await Empresas();
+
+    createSelect(
+      "Selecione uma Empresa",
+      "inputEmpresa",
+      data,
+      "NM_RAZAO_SOCIAL",
+      "ID_EMPRESA",
+      "selectID_EMPRESA");
+
   }
 
   const getProduto = async (event) => {
+    let data
     let ID_EMPRESA = event.target.value;
 
-    let data = await EmpresaProdutos(ID_EMPRESA);
+    sessionStorage.removeItem('selectID_PRODUTO');
+    sessionStorage.removeItem('selectID_ASSUNTO');
 
-    let dropdown = document.getElementById("inputProduto");
-    dropdown.options.length = 0;
-    let option;
-    option = document.createElement('option');
-    option.text = 'Selecione um Produto';
-    dropdown.add(option);
+    data = await EmpresaProdutos(ID_EMPRESA);
 
-    for (let i = 0; i < data.length; i++) {
-      option = document.createElement('option');
-      option.text = data[i].produto.NM_PRODUTO;
-      option.value  = data[i].produto.ID_PRODUTO;
-      dropdown.add(option);
-    }
-    dropdown.selectedIndex = 0;
+    createSelect(
+      "Selecione um Produto",
+      "inputProduto",
+      data,
+      "produto.NM_PRODUTO",
+      "produto.ID_PRODUTO",
+      "selectID_PRODUTO");
+
+    document.getElementById("inputAssunto").options.length = 1;
+
   }
 
-  const getAssunto = (event) => {
+  const getAssunto = async (event) => {
+    let data;
     let ID_PRODUTO = event.target.value;
 
-    let data = AssuntoByProduto(ID_PRODUTO);
+    sessionStorage.removeItem('selectID_ASSUNTO');
 
-    let dropdown = document.getElementById("inputAssunto");
-    dropdown.options.length = 0;
-    let option;
-    option = document.createElement('option');
-    option.text = 'Selecione um Assunto';
-    dropdown.add(option);
+    data = await AssuntosByProduto(ID_PRODUTO);
 
-    for (let i = 0; i < data.length; i++) {
-      option = document.createElement('option');
-      option.text = data[i].DS_ASSUNTO;
-      option.value  = data[i].ID_ASSUNTO;
-      dropdown.add(option);
-    }
-    dropdown.selectedIndex = 0;
+    createSelect(
+      "Selecione um Assunto",
+      "inputAssunto",
+      data,
+      "DS_ASSUNTO",
+      "ID_ASSUNTO",
+      "selectID_ASSUNTO");
   }
 
-  const loadChamados = () => {
-    getSeletEmpresa();
+  const setSessionInputsValue = () => {
+    sessionStorage.setItem("selectID_CHAMADO", document.getElementById('inputCodigo').value);
+    sessionStorage.setItem("selectDT_ABERTURA", document.getElementById('inputDtAbertura').value);
+    sessionStorage.setItem("selectDT_ENCERRAMENTO", document.getElementById('inputDtFinal').value);
+    sessionStorage.setItem("selectDM_STATUS", document.getElementById('inputStatus').value);
+    sessionStorage.setItem("selectID_EMPRESA", document.getElementById('inputEmpresa').value);
+    sessionStorage.setItem("selectID_PRODUTO", document.getElementById('inputProduto').value);
+    sessionStorage.setItem("selectID_ASSUNTO", document.getElementById('inputAssunto').value);
+  }
+
+  const doLimparCampo = () => {
+    sessionStorage.removeItem('selectID_EMPRESA');
+    sessionStorage.removeItem('selectID_PRODUTO');
+    sessionStorage.removeItem('selectID_ASSUNTO');
+    sessionStorage.removeItem('selectID_CHAMADO');
+    sessionStorage.removeItem('selectDT_ABERTURA');
+    sessionStorage.removeItem('selectDT_ENCERRAMENTO');
+    sessionStorage.removeItem('selectDM_STATUS');
+    sessionStorage.removeItem('selectID_ASSUNTO');
+
+    document.getElementById('inputCodigo').value = '';
+    document.getElementById('inputDtAbertura').value = '';
+    document.getElementById('inputDtFinal').value = '';
+
+    document.getElementById('inputStatus').selectedIndex = 1;
+    document.getElementById('inputEmpresa').selectedIndex = 0;
+    document.getElementById('inputProduto').options.length = 1;
+    document.getElementById('inputAssunto').options.length = 1;
   }
 
   const submit = (event) => {
-    event.preventDefault();
+    if (event !== undefined)
+      event.preventDefault();
     document.getElementById("wrapper").innerHTML = "";
 
     gridDataByForm(
@@ -95,7 +206,7 @@ const Chamados = () => {
             );
           }
         },{
-          name: 'Cód.',
+          name: 'Código',
           sort: {
             enabled: true
           },
@@ -103,7 +214,7 @@ const Chamados = () => {
             return gridjs.h('a', {
               className: 'link-primary',
               href: `${url}/dashboard/chamado/${cell}`,
-            }, 'Editar');
+            }, cell);
           }
         },{
           name: 'Assunto',
@@ -157,15 +268,20 @@ const Chamados = () => {
       10,
       false
     );
+
+    setSessionInputsValue();
   };
 
-  window.addEventListener('load', loadChamados);
+  const loadChamados = () => {
+    startSelects();
+  }
 
   document.getElementById('formOsChamadoFiltro').addEventListener('submit', submit);
   document.getElementById('inputEmpresa').addEventListener('change', getProduto);
   document.getElementById('inputProduto').addEventListener('change', getAssunto);
+  document.getElementById('btnLimpar').addEventListener('click', doLimparCampo);
 
+  window.addEventListener('load', loadChamados);
 }
 
 export default Chamados;
-

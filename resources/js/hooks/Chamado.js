@@ -7,8 +7,8 @@ const headers = [
   ["Authorization", "Bearer " + token],
 ];
 
-export const Assuntos = async ( ) => {
-  let data = await fetch(url + '/api/osassunto', {
+export const Chamados = async ( ) => {
+  let data = await fetch(url + '/api/oschamado', {
     method: "GET",
     headers: headers
   })
@@ -25,8 +25,8 @@ export const Assuntos = async ( ) => {
   return data
 }
 
-export const Assunto = async ( idAssunto ) => {
-  let data = await fetch(url + '/api/osassunto?ID_ASSUNTO='+idAssunto, {
+export const Chamado = async (id) => {
+  let data = await fetch(url + '/api/oschamado/' + id, {
     method: "GET",
     headers: headers
   })
@@ -42,22 +42,3 @@ export const Assunto = async ( idAssunto ) => {
 
   return data
 }
-
-export const AssuntosByProduto = async ( idProduto ) => {
-  let data = await fetch(url + '/api/osassunto?ID_PRODUTO='+idProduto, {
-    method: "GET",
-    headers: headers
-  })
-  .then(function(res){
-    return res.json();
-  })
-  .then(function(data){
-    return data
-  })
-  .catch(function(err){
-    console.log(err)
-  });
-
-  return data
-}
-

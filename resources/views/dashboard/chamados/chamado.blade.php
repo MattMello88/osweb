@@ -147,6 +147,8 @@
 
 @section('script')
 <script>
+  let id = `{{$id}}`;
+  pgChamados.Chamado(id);
     new gridjs.Grid({
       columns: [
         {

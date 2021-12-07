@@ -74,7 +74,7 @@
                 <div class="col-sm-12 col-md-6 col-lg-3">
                   <label for="inputProduto" class="form-label">Produto</label>
                   <select id="inputProduto" class="form-select form-select-sm" name="ID_PRODUTO">
-                    <option selected>Selecione um Produo</option>
+                    <option selected>Selecione um Produto</option>
                   </select>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-2">
@@ -87,7 +87,10 @@
 
               <div class="col-12">
                 <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="button" id="btnLimpar" class="btn btn-primary">Limpar</button>
               </div>
+
+
             </form>
           </div>
         </div>

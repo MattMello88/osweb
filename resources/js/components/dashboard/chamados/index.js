@@ -1,3 +1,4 @@
 import Chamados from './Chamados';
-export {Chamados};
+import Chamado from './Chamado';
+export {Chamados, Chamado};
 

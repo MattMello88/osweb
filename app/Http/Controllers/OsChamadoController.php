@@ -14,24 +14,25 @@ class OsChamadoController extends Controller
      */
     public function index(Request $request)
     {
+      //dd($request);
       $where = [
-        'ID_RESPONSAVEL' => $request->user()->ID_USUARIO
+        ['ID_RESPONSAVEL', '=', $request->user()->ID_USUARIO]
       ];
 
       if (isset($request->ID_CHAMADO))
-        $where['ID_CHAMADO'] = $request->ID_CHAMADO;
+        $where[] = ['ID_CHAMADO', '=', $request->ID_CHAMADO];
       if (isset($request->DT_ABERTURA))
-        $where['DT_ABERTURA'] = $request->DT_ABERTURA;
+        $where[] = ['DT_CRIACAO','>=',$request->DT_ABERTURA];
       if (isset($request->DT_ENCERRAMENTO))
-        $where['DT_ENCERRAMENTO'] = $request->DT_ENCERRAMENTO;
+        $where[] = ['DT_CRIACAO', '<=', $request->DT_ENCERRAMENTO];
       if (isset($request->DM_STATUS))
-        $where['DM_STATUS'] = $request->DM_STATUS;
+        $where[] = ['DM_STATUS', '=', $request->DM_STATUS];
       if (isset($request->ID_EMPRESA))
-        $where['ID_EMPRESA'] = $request->ID_EMPRESA;
+        $where[] = ['ID_EMPRESA', '=', $request->ID_EMPRESA];
       if (isset($request->ID_PRODUTO))
-        $where['ID_PRODUTO'] = $request->ID_PRODUTO;
+        $where[] = ['ID_PRODUTO', '=', $request->ID_PRODUTO];
       if (isset($request->ID_ASSUNTO))
-        $where['ID_ASSUNTO'] = $request->ID_ASSUNTO;
+        $where[] = ['ID_ASSUNTO', '=', $request->ID_ASSUNTO];
 
       $data = OsChamado::where($where)->with(['empresa', 'assunto', 'usuario', 'produto', 'previsao', 'criador'])->get();
 
