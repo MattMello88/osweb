@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OsChamado;
+use App\Models\OsTramite;
 use Illuminate\Http\Request;
 
 class OsChamadoController extends Controller
@@ -78,9 +79,10 @@ class OsChamadoController extends Controller
      * @param  \App\Models\OsChamado  $osChamado
      * @return \Illuminate\Http\Response
      */
-    public function show(OsChamado $osChamado)
+    public function show(Request $request)
     {
-      return $osChamado;
+      $data = OsChamado::where(['ID_CHAMADO' => $request->oschamado])->with(['empresa', 'assunto', 'usuario', 'produto', 'previsao', 'criador','tramites', 'anexos', 'observacoes'])->get()->first();
+      return $data;
     }
 
     /**

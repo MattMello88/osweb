@@ -32,56 +32,56 @@
 
             <div class="row col-12 pt-2">
               <div class="col-sm-4 col-md-4">
-                <label for="inputEmail4" class="form-label">Código</label>
-                <input type="number" class="form-control form-control-sm" id="inputEmail4" disabled>
+                <label for="inputCodigo" class="form-label">Código</label>
+                <input type="number" class="form-control form-control-sm" id="inputCodigo" disabled>
               </div>
               <div class="col-sm-8 col-md-8">
-                <label for="inputEmail4" class="form-label">Criador</label>
-                <input type="number" class="form-control form-control-sm" id="inputEmail4" disabled>
+                <label for="inputCriador" class="form-label">Criador</label>
+                <input type="text" class="form-control form-control-sm" id="inputCriador" disabled>
               </div>
             </div>
             <div class="row col-12 pt-2">
               <div class="col-sm-4 col-md-4">
-                <label for="inputAddress" class="form-label">Data Criação</label>
-                <input type="date" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St" disabled>
+                <label for="inputDtCriacao" class="form-label">Data Criação</label>
+                <input type="datetime-local" class="form-control form-control-sm" id="inputDtCriacao" disabled>
               </div>
 
               <div class="col-sm-4 col-md-4">
-                <label for="inputAddress2" class="form-label">Data Abertura</label>
-                <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputDtAbertura" class="form-label">Data Abertura</label>
+                <input type="date" class="form-control form-control-sm" id="inputDtAbertura" disabled>
               </div>
 
               <div class="col-sm-4 col-md-4">
-                <label for="inputAddress2" class="form-label">Data Encerramento</label>
-                <input type="date" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputDtEncerramento" class="form-label">Data Encerramento</label>
+                <input type="date" class="form-control form-control-sm" id="inputDtEncerramento" disabled>
               </div>
             </div>
 
             <div class="row col-12 pt-2">
               <div class="col-sm-4 col-md-4 col-lg-2">
-                <label for="inputCity" class="form-label">Status</label>
-                <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputStatus" class="form-label">Status</label>
+                <input type="text" class="form-control form-control-sm" id="inputStatus" disabled>
               </div>
               <div class="col-sm-12 col-md-8 col-lg-5">
-                <label for="inputState" class="form-label">Empresa</label>
-                <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputEmpresa" class="form-label">Empresa</label>
+                <input type="text" class="form-control form-control-sm" id="inputEmpresa" disabled>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-5">
-                <label for="inputState" class="form-label">Produto</label>
-                <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputProduto" class="form-label">Produto</label>
+                <input type="text" class="form-control form-control-sm" id="inputProduto" disabled>
               </div>
               <div class="col-sm-12 col-md-6 col-lg-4">
-                <label for="inputState" class="form-label">Assunto</label>
-                <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputAssunto" class="form-label">Assunto</label>
+                <input type="text" class="form-control form-control-sm" id="inputAssunto" disabled>
               </div>
               <div class="col-sm-6 col-md-6 col-lg-4">
-                <label for="inputState" class="form-label">Versão</label>
-                <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputVersao" class="form-label">Versão</label>
+                <input type="text" class="form-control form-control-sm" id="inputVersao" disabled>
               </div>
 
               <div class="col-sm-6 col-md-6 col-lg-4">
-                <label for="inputState" class="form-label">Concluído</label>
-                <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                <label for="inputConcluido" class="form-label">Concluído</label>
+                <input type="text" class="form-control form-control-sm" id="inputConcluido" disabled>
               </div>
             </div>
           </form>
@@ -97,19 +97,13 @@
           <div class="tab-content m-3" id="nav-tabContent" >
             <div class="tab-pane fade show active" id="nav-desc-prod" role="tabpanel" aria-labelledby="nav-desc-prod-tab">
               <div class="row col-12 pb-4">
-                <div class="col-sm-4 col-md-4 col-lg-2">
-                  <label for="inputCity" class="form-label">Status</label>
-                  <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
-                </div>
                 <div class="col-sm-12 col-md-8 col-lg-5">
-                  <label for="inputState" class="form-label">Empresa</label>
-                  <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor" disabled>
+                  <label for="inputResumo" class="form-label">Resumo</label>
+                  <input type="text" class="form-control form-control-sm" id="inputResumo" disabled>
                 </div>
               </div>
-              <p> Observação 1 </p>
-              <p> Observação 2 </p>
-              <p> Observação 3 </p>
-              <p> Observação 4 </p>
+              <div class="col-sm-12 col-md-8 col-lg-5" id="listObservacao">
+              </div>
               <a href="#" class="pb-4">Nova Observação</a>
               <p>Descrição completa do chamado</p>
             </div>
@@ -134,7 +128,7 @@
               </div>
             </div>
             <div class="tab-pane fade" id="nav-solucao" role="tabpanel" aria-labelledby="nav-solucao-tab">
-              <textarea name="solucao" id="solucao" cols="130" rows="20">
+              <textarea name="solucao" id="inputSolucao" cols="130" rows="20">
                 vai chegar a solucao, quero fazer isso através do MD
               </textarea>
             </div>

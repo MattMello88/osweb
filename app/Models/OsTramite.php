@@ -10,4 +10,14 @@ class OsTramite extends Model
     use HasFactory;
 
     protected $table = 'os_tramite';
+
+    public function criador()
+    {
+        return $this->belongsTo(User::class,'ID_USUARIO_CRIADOR','ID_USUARIO');
+    }
+
+    public function responsavel()
+    {
+        return $this->belongsTo(User::class,'ID_USUARIO_RESPONSAVEL','ID_USUARIO');
+    }
 }

@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OsAnexo extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'os_anexo';
+  protected $table = 'os_anexo';
+
+  public function contrato()
+  {
+      return $this->belongsTo(OsContrato::class,'ID_CONTRATO','ID_CONTRATO');
+  }
 }
