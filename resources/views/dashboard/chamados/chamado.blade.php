@@ -102,10 +102,16 @@
                   <input type="text" class="form-control form-control-sm" id="inputResumo" disabled>
                 </div>
               </div>
-              <div class="col-sm-12 col-md-8 col-lg-5" id="listObservacao">
+              <div class="col-12" >
+                <ol class="list-group list-group-numbered" id="listObservacao">
+                </ol>
               </div>
-              <a href="#" class="pb-4">Nova Observação</a>
-              <p>Descrição completa do chamado</p>
+
+              <div class="py-4">
+                <a href="#">Nova Observação</a>
+              </div>
+
+              <p id="inputDsChamado">Descrição completa do chamado</p>
             </div>
             <div class="tab-pane fade" id="nav-tramite" role="tabpanel" aria-labelledby="nav-tramite-tab">
 
@@ -128,9 +134,11 @@
               </div>
             </div>
             <div class="tab-pane fade" id="nav-solucao" role="tabpanel" aria-labelledby="nav-solucao-tab">
-              <textarea name="solucao" id="inputSolucao" cols="130" rows="20">
-                vai chegar a solucao, quero fazer isso através do MD
-              </textarea>
+              <div class="card">
+                <div class="card-body" id="inputSolucao">
+                  This is some text within a card body.
+                </div>
+              </div>
             </div>
           </div>
         </div>
