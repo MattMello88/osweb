@@ -43,17 +43,17 @@
             <div class="row col-12 pt-2">
               <div class="col-sm-4 col-md-4">
                 <label for="inputDtCriacao" class="form-label">Data Criação</label>
-                <input type="datetime-local" class="form-control form-control-sm" id="inputDtCriacao" disabled>
+                <input type="text" class="form-control form-control-sm" id="inputDtCriacao" disabled>
               </div>
 
               <div class="col-sm-4 col-md-4">
                 <label for="inputDtAbertura" class="form-label">Data Abertura</label>
-                <input type="date" class="form-control form-control-sm" id="inputDtAbertura" disabled>
+                <input type="text" class="form-control form-control-sm" id="inputDtAbertura" disabled>
               </div>
 
               <div class="col-sm-4 col-md-4">
                 <label for="inputDtEncerramento" class="form-label">Data Encerramento</label>
-                <input type="date" class="form-control form-control-sm" id="inputDtEncerramento" disabled>
+                <input type="text" class="form-control form-control-sm" id="inputDtEncerramento" disabled>
               </div>
             </div>
 
@@ -151,7 +151,7 @@
 <script>
   let id = `{{$id}}`;
   pgChamados.Chamado(id);
-    new gridjs.Grid({
+    /*new gridjs.Grid({
       columns: [
         {
           name: 'Status',
@@ -231,6 +231,6 @@
       className: {
         td: 'p-1 fs-6 fw-light',
       }
-    }).render(document.getElementById("tab-anexo"));
+    }).render(document.getElementById("tab-anexo"));*/
   </script>
 @endsection

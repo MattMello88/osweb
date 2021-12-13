@@ -8,7 +8,7 @@ const headers = [
 const renderGrid = (columns, data, renderTo, limit = 20, search = false) => {
   const grid = new gridjs.Grid({
     columns: columns,
-    data: result(data),
+    data: data,
     pagination: {
       limit: limit,
     },
@@ -19,7 +19,7 @@ const renderGrid = (columns, data, renderTo, limit = 20, search = false) => {
   }).render(renderTo);
   grid.updateConfig({
     search: search,
-    data: result(data),
+    data: data,
   }).forceRender();
 }
 

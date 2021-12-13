@@ -1,1 +1,1 @@
-export {renderGrid} from './utils';
+export {renderGrid} from './Grid';

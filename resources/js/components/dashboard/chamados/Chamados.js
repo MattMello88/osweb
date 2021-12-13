@@ -247,7 +247,6 @@ const Chamados = () => {
         }
       ],
       function (data) {
-        console.log(data);
         return data.map(oschamado =>
           [
             oschamado.DM_STATUS,
