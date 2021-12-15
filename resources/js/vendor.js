@@ -1,0 +1,1 @@
+require('./vendor_bootstrap');

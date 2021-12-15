@@ -60,7 +60,7 @@
 <body class="text-center">
   <main class="form-signin">
     <form id="formSubmitLogin">
-      <img class="mb-4" src="{{ url('images/icone.png') }}" alt="" width="72" height="57">
+      <img class="mb-4" src="{{ url('img/icone.png') }}" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal">Login
         @if(Session::has('token'))
           {{ Session::get('token')}}

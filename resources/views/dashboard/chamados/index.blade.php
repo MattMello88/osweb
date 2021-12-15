@@ -2,10 +2,6 @@
 
 @section('title', 'Chamados')
 
-@section('sub-nav')
-  @include('layouts.sub-nav-chamado-include')
-@endsection
-
 @section('content')
   <div class="tab-content">
 
