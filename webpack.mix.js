@@ -12,14 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/vendor.js', 'public/js')
-    .js('resources/js/theme.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
 
-    .sass('resources/sass/theme-rtl.min.scss', 'public/css')
-    .sass('resources/sass/theme.min.scss', 'public/css')
-    .sass('resources/sass/user-rtl.scss', 'public/css')
-    .sass('resources/sass/user.min.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css')
 
     .sourceMaps()
     .copy('resources/images', 'public/images');
