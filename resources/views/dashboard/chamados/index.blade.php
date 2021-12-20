@@ -5,9 +5,18 @@
 @section('content')
   <div class="card mb-3">
     <div class="card-body position-relative">
+    <div class="d-flex mb-2">
+      <div>
+        <h3>Chamados</h3>
+      </div>
+      <div class="ms-auto">
+      <button class="btn btn-outline-primary me-1 mb-1" type="button">Nova OS</button>
+      </div>
+    </div>
+
       <div class="row">
         <div class="col-lg-8">
-          <h3>Chamados</h3>
+          
         </div>
       </div>
     </div>
@@ -88,6 +97,35 @@
       </div>
 
       <div class="pt-4" id="wrapper"></div>
+
+
+          <div id="tableExample" >
+            <div class="table-responsive scrollbar">
+              <table class="table table-bordered table-striped fs--1 mb-0">
+                <thead class="bg-200 text-900">
+                  <tr>
+                    <th class="sort" data-sort="status">Status</th>
+                    <th class="sort" data-sort="codigo">Código</th>
+                    <th class="sort" data-sort="assunto">Assunto</th>
+                    <th class="sort" data-sort="cliente">Cliente</th>
+                    <th class="sort" data-sort="criador">Criador</th>
+                    <th class="sort" data-sort="responsavel">Responsável</th>
+                    <th class="sort" data-sort="dtabertura">Dt. Abertura</th>
+                    <th class="sort" data-sort="prioridade">Prioridade</th>
+                    <th class="sort" data-sort="dtentrega">Dt. Entrega</th>
+                    <th class="sort" data-sort="dsresumida">Des. Resumida</th> 
+                  </tr>
+                </thead>
+                <tbody class="list">
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+              <ul class="pagination mb-0"></ul>
+              <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+            </div>
+          </div>
     </div>
   </div>
 @endsection

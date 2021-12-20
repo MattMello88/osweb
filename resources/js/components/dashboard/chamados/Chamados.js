@@ -1,4 +1,4 @@
-import {gridDataByForm} from '../../requests';
+import {gridDataByForm, getDataByForm} from '../../requests';
 import {EmpresaProdutos, Empresas, AssuntosByProduto} from '../../../hooks';
 
 const Chamados = () => {
@@ -185,6 +185,74 @@ const Chamados = () => {
     if (event !== undefined)
       event.preventDefault();
     document.getElementById("wrapper").innerHTML = "";
+
+    /*var userList = new List('tableExample', 
+      {valueNames:["status","codigo"],page:5,pagination:true}, 
+      [
+        {
+          status: 'Jonny Strömberg',
+          codigo: 1986
+        },
+        {
+          status: 'Jonas Arnklint',
+          codigo: 1985
+        },
+        {
+          status: 'Martina Elm',
+          codigo: 1986
+        }
+      ]
+    );
+
+    userList.add({
+      name: 'Gustaf Lindqvist',
+      born: 1983
+    }); */
+    getDataByForm(
+      document.getElementById('formOsChamadoFiltro'),
+      function(data){
+        var userList = new List('tableExample', 
+          {
+            valueNames:["status","codigo","assunto","cliente","criador","responsavel","dtabertura","prioridade","dtentrega","dsresumida"],
+            item: 
+              `<tr>
+                <td class="status"></td>
+                <td class="codigo"></td>
+                <td class="assunto"></td>
+                <td class="cliente"></td>
+                <td class="criador"></td>
+                <td class="responsavel"></td>
+                <td class="dtabertura"></td>
+                <td class="prioridade"></td>
+                <td class="dtentrega"></td>
+                <td class="dsresumida"></td>
+              </tr>`,
+            page:2,
+            pagination:true
+          }, 
+          data.map(oschamado =>
+            (
+              {
+                status: oschamado.DM_STATUS,
+                codigo: oschamado.ID_CHAMADO,
+                assunto: oschamado.assunto.DS_ASSUNTO,
+                cliente: oschamado.empresa.NM_FANTASIA,
+                criador: oschamado.criador.NM_USUARIO,
+                responsavel: oschamado.usuario.NM_USUARIO,
+                dtabertura: oschamado.DT_ABERTURA,
+                prioridade: oschamado.NR_PRIORIDADE  == '2' ? 'Alta': oschamado.NR_PRIORIDADE == '1' ? 'Média' : 'Baixa',
+                dtentrega: oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
+                dsresumida: oschamado.DS_REDUZIDA,
+              }
+            )
+          )    
+        );
+      },
+      function(err){
+        console.log('tetse')
+        console.log(err)
+      }
+    );
 
     gridDataByForm(
       document.getElementById('formOsChamadoFiltro'),

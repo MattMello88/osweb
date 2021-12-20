@@ -30,7 +30,8 @@ const sendData = (form, success, error, token = '') => {
 }
 
 const getDataByForm = (form, success, error, token = '') => {
-
+  token = auth.getCookie("token");
+  
   var url = '?';
   for (var i = 0; i < form.length; ++i) {
     if (form[i].value !== ''){
