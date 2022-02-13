@@ -5,14 +5,16 @@
 @section('content')
   <div class="card mb-3">
     <div class="card-body position-relative">
-    <div class="d-flex mb-2">
-      <div>
-        <h3>Chamados</h3>
+      <div class="d-flex mb-2">
+        
+        <div>
+          <h3>Chamados</h3>
+        </div>
+
+        <div class="ms-auto">
+          <button class="btn btn-outline-primary me-1 mb-1" type="button" data-bs-toggle="modal" data-bs-target="#modalNovaOS">Nova OS</button>
+        </div>
       </div>
-      <div class="ms-auto">
-      <button class="btn btn-outline-primary me-1 mb-1" type="button">Nova OS</button>
-      </div>
-    </div>
 
       <div class="row">
         <div class="col-lg-8">
@@ -96,38 +98,118 @@
         </div>
       </div>
 
-      <div class="pt-4" id="wrapper"></div>
+       <div class="pt-4" id="wrapper"></div> 
 
 
-          <div id="tableExample" >
-            <div class="table-responsive scrollbar">
-              <table class="table table-bordered table-striped fs--1 mb-0">
-                <thead class="bg-200 text-900">
-                  <tr>
-                    <th class="sort" data-sort="status">Status</th>
-                    <th class="sort" data-sort="codigo">Código</th>
-                    <th class="sort" data-sort="assunto">Assunto</th>
-                    <th class="sort" data-sort="cliente">Cliente</th>
-                    <th class="sort" data-sort="criador">Criador</th>
-                    <th class="sort" data-sort="responsavel">Responsável</th>
-                    <th class="sort" data-sort="dtabertura">Dt. Abertura</th>
-                    <th class="sort" data-sort="prioridade">Prioridade</th>
-                    <th class="sort" data-sort="dtentrega">Dt. Entrega</th>
-                    <th class="sort" data-sort="dsresumida">Des. Resumida</th> 
-                  </tr>
-                </thead>
-                <tbody class="list">
-                </tbody>
-              </table>
-            </div>
-            <div class="d-flex justify-content-center mt-3">
-              <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-              <ul class="pagination mb-0"></ul>
-              <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
-            </div>
-          </div>
+      <div id="tableOS" data-list="{}">
+        <div class="table-responsive scrollbar">
+          <table class="table table-bordered table-striped fs--1 mb-0">
+            <thead class="bg-200 text-900">
+              <tr>
+                <th class="sort" data-sort="status">Status</th>
+                <th class="sort" data-sort="codigo">Código</th>
+                <th class="sort" data-sort="assunto">Assunto</th>
+                <th class="sort" data-sort="cliente">Cliente</th>
+                <th class="sort" data-sort="criador">Criador</th>
+                <th class="sort" data-sort="responsavel">Responsável</th>
+                <th class="sort" data-sort="dtabertura">Dt. Abertura</th>
+                <th class="sort" data-sort="prioridade">Prioridade</th>
+                <th class="sort" data-sort="dtentrega">Dt. Entrega</th>
+                <th class="sort" data-sort="dsresumida">Des. Resumida</th> 
+              </tr>
+            </thead>
+            <tbody class="list" id="list-clear">
+            </tbody>
+          </table>
+        </div>
+          <div class="d-flex justify-content-center mt-3">
+        <!--  <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button> -->
+          <ul class="pagination mb-0"></ul>
+          <!-- <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button> -->
+        </div>
+      </div>
     </div>
   </div>
+
+
+
+
+
+  
+<div class="modal fade" id="modalNovaOS" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalNovaOSLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg mt-6" role="document">
+    <div class="modal-content border-0">
+
+      
+      <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
+        <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <form action="{{url('/api/oschamado')}}" method="POST" id="formOsChamadoAdd">
+
+        <div class="modal-body p-0">
+          
+          <div class="bg-light rounded-top-lg py-3 ps-4 pe-6">
+            <h4 class="mb-1" id="modalNovaOSLabel">Adicionar nova ordem de serviço</h4>
+            <p class="fs--2 mb-0">Criado por <a class="link-600 fw-semi-bold" href="#" id="NomeCriadorAdd">Matheus</a></p>
+          </div>
+
+          <div class="p-4">
+            <div class="row">
+              
+              <div class="col-lg-12">
+                <div class="d-flex">
+                  <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
+                  <div class="flex-1">
+
+                    <h5 class="mb-2 fs-0">Empresa</h5>
+                    <select id="inputEmpresaAdd" class="form-select form-select-sm" name="ID_EMPRESA" required>
+                      <option selected></option>
+                    </select>
+
+                    <h5 class="my-2 fs-0">Produto</h5>
+                    <select id="inputProdutoAdd" class="form-select form-select-sm" name="ID_PRODUTO" required>
+                      <option selected></option>
+                    </select>
+
+                    <h5 class="my-2 fs-0">Assunto</h5>
+                    <select id="inputAssuntoAdd" class="form-select form-select-sm" name="ID_ASSUNTO" required>
+                      <option selected></option>
+                    </select>
+                    
+                    <hr class="my-4" />
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
+                  <div class="flex-1">
+                    <h5 class="mb-2 fs-0">Resumo</h5>
+                    <input type="text" class="form-control form-control-sm" id="inputResumoAdd" name="DS_REDUZIDA" required>
+
+                    <h5 class="my-2 fs-0">Descrição</h5>
+                    <div class="min-vh-50">
+                      <textarea class="form-control form-control-sm min-vh-50" id="inputDescricaoAdd" name="DS_CHAMADO" required="true"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div id="alertAdd"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+          <button class="btn btn-primary" id="btnAddOS" type="submit">Salvar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
 @endsection
 
 
@@ -135,4 +217,5 @@
 <script>
   pgChamados.Chamados();
 </script>
+<script src="{{ url('/vendors/tinymce/tinymce.min.js') }}"></script>
 @endsection

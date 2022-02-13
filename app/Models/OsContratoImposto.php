@@ -10,4 +10,6 @@ class OsContratoImposto extends Model
     use HasFactory;
 
     protected $table = 'os_contrato_imposto';
+
+    public $timestamps = false;
 }

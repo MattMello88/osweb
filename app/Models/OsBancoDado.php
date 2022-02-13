@@ -10,4 +10,6 @@ class OsBancoDado extends Model
     use HasFactory;
 
     protected $table = 'os_banco_dados';
+
+    public $timestamps = false;
 }

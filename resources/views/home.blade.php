@@ -29,6 +29,7 @@
 
   <link href="{{ url('css/app.css') }}" rel="stylesheet">
 
+  <link href="{{ url('/vendors/prism/prism-okaidia.css') }}" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
   <link href="{{ url('/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
@@ -54,6 +55,8 @@
   </script>
 
   <script>var url = "{{ url('/') }}";</script>
+  <script src="{{ url('js/auth.js') }}"></script>
+
   
 </head>
 
@@ -93,7 +96,7 @@
                         <div class="toast align-items-center text-white bg-primary border-0 mb-4 show" id="toast-login" role="alert" aria-live="assertive" aria-atomic="true">
                           <div class="d-flex">
                             <div class="toast-body" id="toast-login-body">
-                              Hello, world! This is a toast message.
+                              Deu erro
                             </div>
                             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                           </div>

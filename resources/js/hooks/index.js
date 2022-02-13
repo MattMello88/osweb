@@ -4,3 +4,6 @@ export {Empresas, Empresa} from './Empresa';
 export {Assuntos, Assunto, AssuntosByProduto} from './Assunto';
 
 export {Chamados, Chamado} from './Chamado';
+export {Tramites, Tramite} from './Tramite';
+
+export {FuncionarioUsuarios, FuncionarioUsuario} from './Usuario';

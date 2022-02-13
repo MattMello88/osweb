@@ -10,4 +10,6 @@ class OsAtividade extends Model
     use HasFactory;
 
     protected $table = 'os_atividade';
+
+    public $timestamps = false;
 }

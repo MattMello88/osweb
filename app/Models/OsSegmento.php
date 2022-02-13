@@ -10,4 +10,6 @@ class OsSegmento extends Model
     use HasFactory;
 
     protected $table = 'os_segmento';
+
+    public $timestamps = false;
 }

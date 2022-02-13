@@ -10,4 +10,6 @@ class OsDescritorDespesa extends Model
     use HasFactory;
 
     protected $table = 'os_descritor_despesa';
+
+    public $timestamps = false;
 }

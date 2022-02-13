@@ -10,4 +10,6 @@ class OsInterrupcao extends Model
     use HasFactory;
 
     protected $table = 'os_interrupcao';
+
+    public $timestamps = false;
 }

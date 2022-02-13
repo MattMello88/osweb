@@ -11,6 +11,8 @@ class OsAnexo extends Model
 
   protected $table = 'os_anexo';
 
+  public $timestamps = false;
+
   public function contrato()
   {
       return $this->belongsTo(OsContrato::class,'ID_CONTRATO','ID_CONTRATO');

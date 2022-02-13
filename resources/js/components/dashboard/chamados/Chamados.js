@@ -1,7 +1,89 @@
-import {gridDataByForm, getDataByForm} from '../../requests';
-import {EmpresaProdutos, Empresas, AssuntosByProduto} from '../../../hooks';
+import {gridDataByForm, getDataByForm, sendData} from '../../requests';
+import {EmpresaProdutos, Empresas, AssuntosByProduto, getCookie} from '../../../hooks';
+import {alert} from '../../utils';
 
 const Chamados = () => {
+
+  const loadNovaOS = async () => {
+    let data = await Empresas();
+
+    createSelect(
+      "",
+      "inputEmpresaAdd",
+      data,
+      "NM_RAZAO_SOCIAL",
+      "ID_EMPRESA",
+      "");
+  };
+
+  const getProdutoAdd = async (event) => {
+    let data
+    let ID_EMPRESA = event.target.value;
+
+    data = await EmpresaProdutos(ID_EMPRESA);
+
+    createSelect(
+      "",
+      "inputProdutoAdd",
+      data,
+      "produto.NM_PRODUTO",
+      "produto.ID_PRODUTO",
+      "");
+
+  }
+
+  const getAssuntoAdd = async (event) => {
+    let data;
+    let ID_PRODUTO = event.target.value;
+
+    data = await AssuntosByProduto(ID_PRODUTO);
+
+    createSelect(
+      "",
+      "inputAssuntoAdd",
+      data,
+      "DS_ASSUNTO",
+      "ID_ASSUNTO",
+      "");
+  }
+
+  const submitAdd = (event) => {
+    if (event !== undefined)
+      event.preventDefault();
+    
+    document.getElementById("list-clear").innerHTML = "";
+
+    sendData(
+      document.getElementById('formOsChamadoAdd'),
+      function(data){
+        if (data.message !== 'Unauthenticated.'){
+          
+          console.log(data);
+          alert('alertAdd', 'Criado uma nova ordem de serviço.', 'success');
+          
+          submit();
+
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('modalNovaOS'));
+          myModal.toggle();
+
+          doLimparCampoNovaOS();
+        }
+      },
+      function(data){
+        alert('alertAdd', 'Falha ao criar nova ordem de serviço.', 'warning');
+      },
+    );
+    
+  };
+
+  const doLimparCampoNovaOS = () => {
+    document.getElementById('inputResumoAdd').value = '';
+    document.getElementById('inputDescricaoAdd').value = '';
+
+    document.getElementById('inputEmpresaAdd').selectedIndex = 0;
+    document.getElementById('inputProdutoAdd').options.length = 1;
+    document.getElementById('inputAssuntoAdd').options.length = 1;
+  }
 
   const createSelect = (selectText, idInput, data, fieldText, fieldValue, sessionId) => {
     let dropdown = document.getElementById(idInput);
@@ -161,7 +243,7 @@ const Chamados = () => {
     sessionStorage.setItem("selectID_ASSUNTO", document.getElementById('inputAssunto').value);
   }
 
-  const doLimparCampo = () => {
+  const doLimparCampoPesquisa = () => {
     sessionStorage.removeItem('selectID_EMPRESA');
     sessionStorage.removeItem('selectID_PRODUTO');
     sessionStorage.removeItem('selectID_ASSUNTO');
@@ -184,34 +266,13 @@ const Chamados = () => {
   const submit = (event) => {
     if (event !== undefined)
       event.preventDefault();
-    document.getElementById("wrapper").innerHTML = "";
+      
+    document.getElementById("list-clear").innerHTML = "";
 
-    /*var userList = new List('tableExample', 
-      {valueNames:["status","codigo"],page:5,pagination:true}, 
-      [
-        {
-          status: 'Jonny Strömberg',
-          codigo: 1986
-        },
-        {
-          status: 'Jonas Arnklint',
-          codigo: 1985
-        },
-        {
-          status: 'Martina Elm',
-          codigo: 1986
-        }
-      ]
-    );
-
-    userList.add({
-      name: 'Gustaf Lindqvist',
-      born: 1983
-    }); */
     getDataByForm(
       document.getElementById('formOsChamadoFiltro'),
       function(data){
-        var userList = new List('tableExample', 
+        var userList = new List('tableOS', 
           {
             valueNames:["status","codigo","assunto","cliente","criador","responsavel","dtabertura","prioridade","dtentrega","dsresumida"],
             item: 
@@ -227,14 +288,21 @@ const Chamados = () => {
                 <td class="dtentrega"></td>
                 <td class="dsresumida"></td>
               </tr>`,
-            page:2,
+            page:5,
             pagination:true
           }, 
           data.map(oschamado =>
             (
               {
-                status: oschamado.DM_STATUS,
-                codigo: oschamado.ID_CHAMADO,
+                status: 
+                  `<span
+                    class='badge rounded-pill bg-${((oschamado.DM_STATUS == '0') ? 'secondary' : (oschamado.DM_STATUS == '1') ? 'primary' : 'success')}'
+                    data-bs-toggle='tooltip'
+                    data-bs-html='true'
+                    title='${((oschamado.DM_STATUS == '0') ? 'Não Iniciada' : (oschamado.DM_STATUS == '1') ? 'Iniciada' : 'Encerrada')}'
+                  >${((oschamado.DM_STATUS == '0') ? 'n' : (oschamado.DM_STATUS == '1') ? 'i' : 'e')}
+                  </span>`,
+                codigo: `<a href="${url}/dashboard/chamado/${oschamado.ID_CHAMADO}" class="link-primary">${oschamado.ID_CHAMADO}</a>`,
                 assunto: oschamado.assunto.DS_ASSUNTO,
                 cliente: oschamado.empresa.NM_FANTASIA,
                 criador: oschamado.criador.NM_USUARIO,
@@ -249,91 +317,7 @@ const Chamados = () => {
         );
       },
       function(err){
-        console.log('tetse')
-        console.log(err)
       }
-    );
-
-    gridDataByForm(
-      document.getElementById('formOsChamadoFiltro'),
-      [
-        {
-          name: 'Status',
-          sort: {
-            enabled: true
-          },
-          formatter: (cell, row) => {
-            return gridjs.html(
-              `<span
-                  class='badge rounded-pill bg-${((cell == '0') ? 'secondary' : (cell == '1') ? 'primary' : 'success')}'
-                  data-bs-toggle='tooltip'
-                  data-bs-html='true'
-                  title='${((cell == '0') ? 'Não Iniciada' : (cell == '1') ? 'Iniciada' : 'Encerrada')}'
-                >${((cell == '0') ? 'n' : (cell == '1') ? 'i' : 'e')}
-                </span>`
-            );
-          }
-        },{
-          name: 'Código',
-          sort: {
-            enabled: true
-          },
-          formatter: (cell, row) => {
-            return gridjs.h('a', {
-              className: 'link-primary',
-              href: `${url}/dashboard/chamado/${cell}`,
-            }, cell);
-          }
-        },{
-          name: 'Assunto',
-        },{
-          name: 'Cliente',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Criador',
-        },{
-          name: 'Responsável',
-        },{
-          name: 'Dt. Abertura',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Prioridade',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Dt. Entrega',
-          sort: {
-            enabled: true
-          }
-        },{
-          name: 'Des. Resumida',
-        }
-      ],
-      function (data) {
-        return data.map(oschamado =>
-          [
-            oschamado.DM_STATUS,
-            oschamado.ID_CHAMADO,
-            oschamado.assunto.DS_ASSUNTO,
-            oschamado.empresa.NM_FANTASIA,
-            oschamado.criador.NM_USUARIO,
-            oschamado.usuario.NM_USUARIO,
-            oschamado.DT_ABERTURA,
-            oschamado.NR_PRIORIDADE  == '2' ? 'Alta': oschamado.NR_PRIORIDADE == '1' ? 'Média' : 'Baixa',
-            oschamado.DT_DATA_DESEJAVEL_DE_ENTREGA,
-            oschamado.DS_REDUZIDA,
-          ]
-        )
-      },
-
-      document.getElementById("wrapper"),
-      10,
-      false
     );
 
     setSessionInputsValue();
@@ -341,12 +325,28 @@ const Chamados = () => {
 
   const loadChamados = () => {
     startSelects();
+    var usuario = JSON.parse(getCookie('usuario'));
+    document.getElementById('NomeCriadorAdd').innerText = usuario.NM_USUARIO;
   }
+
+  /**
+   *  Filtro
+   */
 
   document.getElementById('formOsChamadoFiltro').addEventListener('submit', submit);
   document.getElementById('inputEmpresa').addEventListener('change', getProduto);
   document.getElementById('inputProduto').addEventListener('change', getAssunto);
-  document.getElementById('btnLimpar').addEventListener('click', doLimparCampo);
+  document.getElementById('btnLimpar').addEventListener('click', doLimparCampoPesquisa);
+
+  /**
+   *  Modal Add OS
+   */
+   
+  document.getElementById('modalNovaOS').addEventListener('shown.bs.modal', loadNovaOS);
+  document.getElementById('inputEmpresaAdd').addEventListener('change', getProdutoAdd);
+  document.getElementById('inputProdutoAdd').addEventListener('change', getAssuntoAdd);
+
+  document.getElementById('formOsChamadoAdd').addEventListener('submit', submitAdd);
 
   window.addEventListener('load', loadChamados);
 }

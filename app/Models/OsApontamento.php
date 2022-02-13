@@ -10,4 +10,6 @@ class OsApontamento extends Model
     use HasFactory;
 
     protected $table = 'os_apontamento';
+
+    public $timestamps = false;
 }

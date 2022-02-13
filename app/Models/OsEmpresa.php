@@ -12,4 +12,6 @@ class OsEmpresa extends Model
     protected $table = 'os_empresa';
 
     protected $primaryKey = 'id_empresa';
+
+    public $timestamps = false;
 }

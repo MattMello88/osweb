@@ -11,6 +11,10 @@ class OsObservacao extends Model
 
     protected $table = 'os_observacao';
 
+    protected $primaryKey = 'ID_OBSERVACAO';
+
+    public $timestamps = false;
+
     public function usuario()
     {
         return $this->belongsTo(User::class,'ID_USUARIO','ID_USUARIO');

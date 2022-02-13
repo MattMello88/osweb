@@ -10,4 +10,6 @@ class OsGrupo extends Model
     use HasFactory;
 
     protected $table = 'os_grupo';
+
+    public $timestamps = false;
 }

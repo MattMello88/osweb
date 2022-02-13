@@ -37,6 +37,9 @@ const checkLogin = function() {
     if (data.Authorization !== undefined){
       if (data.Authorization !== 'true'){
         window.location = url + '/';
+      } else if (data.Authorization === 'true'){
+        //console.log(data.usuario);
+        auth.setCookie('usuario', JSON.stringify(data.usuario));
       }
     } else {
       window.location = url + '/';

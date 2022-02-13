@@ -13,6 +13,8 @@ class OsChamado extends Model
 
     protected $primaryKey = 'ID_CHAMADO';
 
+    public $timestamps = false;
+
     public function empresa()
     {
         return $this->hasOne(OsEmpresa::class, 'ID_EMPRESA', 'ID_EMPRESA');

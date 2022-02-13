@@ -11,6 +11,10 @@ class OsTramite extends Model
 
     protected $table = 'os_tramite';
 
+    protected $primaryKey = 'ID_TRAMITE';
+
+    public $timestamps = false;
+
     public function criador()
     {
         return $this->belongsTo(User::class,'ID_USUARIO_CRIADOR','ID_USUARIO');

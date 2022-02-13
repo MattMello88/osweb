@@ -14,6 +14,8 @@ class User extends Authenticatable
 
     protected $table = 'os_usuario';
 
+    public $timestamps = false;
+
     protected $fillable = [
       'DS_SENHA',
   ];

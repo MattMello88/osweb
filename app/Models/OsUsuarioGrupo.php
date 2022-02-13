@@ -10,4 +10,6 @@ class OsUsuarioGrupo extends Model
     use HasFactory;
 
     protected $table = 'os_usuario_grupo';
+
+    public $timestamps = false;
 }

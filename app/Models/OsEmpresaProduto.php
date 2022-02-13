@@ -11,6 +11,8 @@ class OsEmpresaProduto extends Model
 
     protected $table = 'os_empresa_produto';
 
+    public $timestamps = false;
+
     public function produto()
     {
         return $this->hasOne(OsProduto::class, 'ID_PRODUTO', 'ID_PRODUTO');

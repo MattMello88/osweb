@@ -27,10 +27,10 @@ class OsObservacaoController extends Controller
     {
       $data = new OsObservacao;
       $data->ID_OBSERVACAO = $request->ID_OBSERVACAO;
-      $data->DT_OBSERVACAO = $request->DT_OBSERVACAO;
+      $data->DT_OBSERVACAO = isset($request->DT_OBSERVACAO) ? $request->DT_OBSERVACAO : now();
       $data->DS_DESCRICAO = $request->DS_DESCRICAO;
       $data->ID_CHAMADO = $request->ID_CHAMADO;
-      $data->ID_USUARIO = $request->ID_USUARIO;
+      $data->ID_USUARIO = $request->user()->ID_USUARIO;
       $data->save();
       return $data;
     }

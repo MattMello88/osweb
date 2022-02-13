@@ -10,4 +10,6 @@ class OsTitulo extends Model
     use HasFactory;
 
     protected $table = 'os_titulo';
+
+    public $timestamps = false;
 }

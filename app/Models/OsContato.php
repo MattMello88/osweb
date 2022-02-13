@@ -10,4 +10,6 @@ class OsContato extends Model
     use HasFactory;
 
     protected $table = 'os_contato';
+
+    public $timestamps = false;
 }

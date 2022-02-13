@@ -10,4 +10,6 @@ class OsAcompanhamento extends Model
     use HasFactory;
 
     protected $table = 'os_acompanhamento';
+
+    public $timestamps = false;
 }

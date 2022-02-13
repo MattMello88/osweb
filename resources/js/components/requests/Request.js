@@ -1,21 +1,14 @@
 const sendData = (form, success, error, token = '') => {
-  var formData = new FormData();
-  for (var i = 0; i < form.length; ++i) {
-    formData.append(form[i].name, form[i].value);
-  }
+  token = auth.getCookie("token");
 
+  var formData = new FormData(form);
+  
   let headers = [];
 
-  if (token == ''){
-    headers = [
-      ["Accept", "application/json"],
-    ];
-  } else {
-    headers = [
-      ["Accept", "application/json"],
-      ["Authorization", "Bearer " + token],
-    ];
-  }
+  headers = [
+    ["Accept", "application/json"],
+    ["Authorization", "Bearer " + token],
+  ];
 
   fetch(form.action, {
     method: form.method.toUpperCase(),
@@ -44,16 +37,10 @@ const getDataByForm = (form, success, error, token = '') => {
 
   let headers = [];
 
-  if (token == ''){
-    headers = [
-      ["Accept", "application/json"],
-    ];
-  } else {
-    headers = [
-      ["Accept", "application/json"],
-      ["Authorization", "Bearer " + token],
-    ];
-  }
+  headers = [
+    ["Accept", "application/json"],
+    ["Authorization", "Bearer " + token],
+  ];
 
   fetch(form.action + url, {
     method: "GET",

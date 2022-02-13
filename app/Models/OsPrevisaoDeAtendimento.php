@@ -10,4 +10,6 @@ class OsPrevisaoDeAtendimento extends Model
     use HasFactory;
 
     protected $table = 'os_previsao_de_atendimento';
+
+    public $timestamps = false;
 }

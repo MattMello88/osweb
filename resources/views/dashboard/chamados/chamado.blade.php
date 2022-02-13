@@ -9,23 +9,27 @@
         <h1 class="h2">Chamado {{$id}}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
+            
+            <form action="{{url('/api/oschamado/'.$id)}}" method="POST" id="formChamadoStatus">
+              <input type="hidden" name="_method" value="PUT">
+              <input type="hidden" name="DM_STATUS" id="inputChangeStatus">
+              <input type="hidden" name="ID_CHAMADO" id="inputChangeIdChamado">
+            </form>
 
             <a href="javascript:history.back()" rule="button" class="btn btn-outline-secondary">
               <i class="bi bi-arrow-left-square" style="font-size: 1.1rem;"></i>
               Voltar
             </a>
-            <button type="button" class="btn btn-outline-secondary">
-              <i class="bi bi-lock" style="font-size: 1.1rem;"></i>
-              Encerrar
-              <span data-feather="calendar"></span>
+            <button type="submit" class="btn btn-outline-secondary" id="btnStatus" form="formChamadoStatus" >
             </button>
+
           </div>
         </div>
       </div>
 
       <div class="card p-0">
         <div class="card-header bg-primary text-dark bg-opacity-10">
-          Featured
+          Destaque
         </div>
         <div class="card-body">
           <form class="row g-3">
@@ -108,21 +112,49 @@
               </div>
 
               <div class="py-4">
-                <a href="#">Nova Observação</a>
+                <button class="btn btn-outline-primary me-1 mb-1" type="button" data-bs-toggle="modal" data-bs-target="#modalNovaObservacao">Nova Observação</button>
               </div>
 
               <p id="inputDsChamado">Descrição completa do chamado</p>
             </div>
+
             <div class="tab-pane fade" id="nav-tramite" role="tabpanel" aria-labelledby="nav-tramite-tab">
 
-              <button type="button" class="btn btn-outline-primary mb-4">
+              <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalTramiteAdd">
                 <i class="bi bi-file-text" style="font-size: 1.1rem;"></i>
                   Adicionar
               </button>
-
-              <div id="tab-tramite"></div>
+              
+              <div id="tableTramite" data-list="{}">
+                <div class="table-responsive scrollbar">
+                  <table class="table table-bordered table-striped fs--1 mb-0">
+                    <thead class="bg-200 text-900">
+                      <tr>
+                        <th class="sort" data-sort="status">Status</th>
+                        <th class="sort" data-sort="codigo">Código</th>
+                        <th class="sort" data-sort="situacao">Situação</th>
+                        <th class="sort" data-sort="prioridade">Prioridade</th>
+                        <td class="sort" data-sort="dsresumida">Ds. Resumida</td>
+                        <th class="sort" data-sort="responsavel">Responsável</th>
+                        <th class="sort" data-sort="criador">Criador</th>
+                        <th class="sort" data-sort="dtinicio">Dt. Inicio</th>                        
+                        <th class="sort" data-sort="dtfim">Dt. Fim</th>
+                        <th class="sort" data-sort="tempAtend">Tempo Atendimento</th> 
+                      </tr>
+                    </thead>
+                    <tbody class="list" id="list-tramite-clear">
+                    </tbody>
+                  </table>
+                </div>
+                  <div class="d-flex justify-content-center mt-3">
+                <!--  <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button> -->
+                  <ul class="pagination mb-0"></ul>
+                  <!-- <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button> -->
+                </div>
+              </div>
 
             </div>
+
             <div class="tab-pane fade" id="nav-anexo" role="tabpanel" aria-labelledby="nav-anexo-tab">
               <div class="mb-3">
                 <label for="formFileSm" class="form-label">Anexar Arquivo</label>
@@ -132,6 +164,27 @@
               <div class="table-responsive">
                 <div id="tab-anexo"></div>
               </div>
+
+              <div id="tableAnexo" data-list="{}">
+                <div class="table-responsive scrollbar">
+                  <table class="table table-bordered table-striped fs--1 mb-0">
+                    <thead class="bg-200 text-900">
+                      <tr>
+                        <th class="sort" data-sort="codigo">Código</th>
+                        <th class="sort" data-sort="nome">Nome</th>
+                      </tr>
+                    </thead>
+                    <tbody class="list" id="list-clear">
+                    </tbody>
+                  </table>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                <!--  <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button> -->
+                  <ul class="pagination mb-0"></ul>
+                  <!-- <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button> -->
+                </div>
+              </div>
+
             </div>
             <div class="tab-pane fade" id="nav-solucao" role="tabpanel" aria-labelledby="nav-solucao-tab">
               <div class="card">
@@ -144,6 +197,249 @@
         </div>
       </div>
 
+<div class="modal fade" id="modalNovaObservacao" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalNovaOSLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg mt-6" role="document">
+    <div class="modal-content border-0">
+      
+      <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
+        <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <form action="{{url('/api/osobservacao')}}" method="POST" id="formObservacaoAdd">
+
+        <div class="modal-body p-0">
+          
+          <div class="bg-light rounded-top-lg py-3 ps-4 pe-6">
+            <h4 class="mb-1" id="modalNovaObservacaoLabel">Adicionar nova Observação</h4>
+            <p class="fs--2 mb-0">Criado por <a class="link-600 fw-semi-bold" href="#" id="NomeCriadorObs"></a></p>
+          </div>
+
+          <div class="p-4">
+            <div class="row">
+              <input type="hidden" name="ID_CHAMADO" value="{{$id}}">
+
+              <div class="col-lg-12">
+                
+                <div class="d-flex">
+                  <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
+                  <div class="flex-1">
+
+                    <h5 class="mb-2 fs-0">Empresa</h5>
+                    <select id="inputEmpresaAdd" class="form-select form-select-sm" name="ID_EMPRESA" required>
+                      <option selected></option>
+                    </select>
+
+                    <h5 class="my-2 fs-0">Produto</h5>
+                    <select id="inputProdutoAdd" class="form-select form-select-sm" name="ID_PRODUTO" required>
+                      <option selected></option>
+                    </select>
+
+                    <h5 class="my-2 fs-0">Assunto</h5>
+                    <select id="inputAssuntoAdd" class="form-select form-select-sm" name="ID_ASSUNTO" required>
+                      <option selected></option>
+                    </select>
+                    
+                    <hr class="my-4" />
+                  </div>
+                </div>
+
+                <div class="d-flex">
+                  <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
+                  <div class="flex-1">
+                    <h5 class="my-2 fs-0">Descrição</h5>
+                    <div class="min-vh-50">
+                      <textarea class="form-control form-control-sm min-vh-50" id="inputDescricaoAdd" name="DS_DESCRICAO" required="true"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div id="alertAdd"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+          <button class="btn btn-primary" id="btnAddObs" type="submit">Adicionar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalTramiteAdd" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg mt-6" role="document">
+    <div class="modal-content border-0">
+      
+      <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
+        <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="{{url('/api/ostramite')}}" method="POST" id="formTramiteAdd">
+
+        <div class="modal-body p-0">
+          
+          <div class="bg-light rounded-top-lg py-3 ps-4 pe-6">
+            <h4 class="mb-1" id="modalNovaObservacaoLabel">Adicionar novo Tramite</h4>
+            <p class="fs--2 mb-0">Criado por <a class="link-600 fw-semi-bold" href="#" id="NomeCriadorTramite"></a></p>
+          </div>
+
+          <div class="p-4">
+            <div class="row">
+              <input type="hidden" name="ID_CHAMADO" value="{{$id}}">
+              <input type="hidden" name="DM_STATUS" value="0">
+
+              <div class="d-flex">
+                <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
+                <div class="flex-1">
+
+                  <h5 class="mb-2 fs-0">Para</h5>
+                  <select id="inputFuncionarioAdd" class="form-select form-select-sm" name="ID_USUARIO_RESPONSAVEL" required>
+                    <option selected></option>
+                  </select>
+
+                  <h5 class="mb-2 fs-0">Prioridade</h5>
+                  <select id="inputPrioridadeAdd" class="form-select form-select-sm" name="NR_PRIORIDADE" required>
+                    <option selected>Selecione a Prioridade</option>
+                    <option value="0">Alta</option>
+                    <option value="1">Média</option>
+                    <option value="2">Baixa</option>
+                  </select>
+                  
+                  <hr class="my-4" />
+                </div>
+              </div>
+                
+              <div class="col-lg-12">
+                <div class="d-flex">
+                  <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
+                  <div class="flex-1">
+                    <h5 class="mb-2 fs-0">Descrição Resumida</h5>
+                    <input type="text" class="form-control form-control-sm" id="inputReduzidaAdd" name="DS_REDUZIDA" required>
+
+                    <h5 class="my-2 fs-0">Descrição</h5>
+
+                    <div class="min-vh-50">
+                      <textarea class="form-control form-control-sm min-vh-50" id="inputDsTramiteAdd" name="DS_TRAMITE" required="true"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div id="alertAdd"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+          <button class="btn btn-primary" id="btnAddObs" type="submit">Adicionar</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalTramiteEdt" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg mt-6" role="document">
+    <div class="modal-content border-0">
+      
+      <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
+        <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="{{url('/api/ostramite')}}" method="POST" id="formTramiteEdt">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="modal-body p-0">
+          <div class="bg-light rounded-top-lg py-3 ps-4 pe-6">
+            <h4 class="mb-1" id="modalNovaObservacaoLabel">Editar Tramite</h4>
+            <p class="fs--2 mb-0">Editado por <a class="link-600 fw-semi-bold" href="#" id="NomeEditorTramite"></a></p>
+          </div>
+          
+          <div class="p-3">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item"><a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tab-tramite" role="tab" aria-controls="tab-tramite" aria-selected="true">Tramite</a></li>
+              <li class="nav-item"><a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab-solucao" role="tab" aria-controls="tab-solucao" aria-selected="false">Solução</a></li>
+            </ul>
+            
+            <div class="tab-content border-x border-bottom p-3" id="myTabContent">
+              <div class="tab-pane fade show active" id="tab-tramite" role="tabpanel" aria-labelledby="home-tab">
+                <div class="py-4">
+                  <div class="row">
+                    <input type="hidden" name="ID_CHAMADO" value="{{$id}}">
+                    <input type="hidden" id="inputTramiteIdEdt" name="ID_TRAMITE" value="">
+                    <input type="hidden" id="inputDmStatusEdt" name="DM_STATUS" value="0">
+
+                    <div class="d-flex">
+                      <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
+                      <div class="flex-1">
+
+                        <h5 class="mb-2 fs-0">Para</h5>
+                        <select id="inputFuncionarioEdt" class="form-select form-select-sm" name="ID_USUARIO_RESPONSAVEL" required>
+                          <option selected></option>
+                        </select>
+
+                        <h5 class="my-2 fs-0">Prioridade</h5>
+                        <select id="inputPrioridadeEdt" class="form-select form-select-sm" name="NR_PRIORIDADE" required>
+                          <option selected>Selecione a Prioridade</option>
+                          <option value="0">Alta</option>
+                          <option value="1">Média</option>
+                          <option value="2">Baixa</option>
+                        </select>
+                        
+                        <hr class="my-4" />
+                      </div>
+                    </div>
+                      
+                    <div class="col-lg-12">
+                      <div class="d-flex">
+                        <span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
+                        <div class="flex-1">
+
+                          <h5 class="mb-2 fs-0">Descrição Resumida</h5>
+                          <input type="text" class="form-control form-control-sm" id="inputReduzidaEdt" name="DS_REDUZIDA" required>
+
+                          <h5 class="my-2 fs-0">Descrição</h5>
+                          <div class="min-vh-50">
+                            <textarea class="form-control form-control-sm min-vh-50" id="inputDsTramiteEdt" name="DS_TRAMITE" required="true"></textarea>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                <div id="alertAdd"></div>
+              </div>
+              
+              <div class="tab-pane fade" id="tab-solucao" role="tabpanel" aria-labelledby="profile-tab" id="">
+                <div class="min-vh-50">
+                  <textarea class="form-control form-control-sm min-vh-50" id="inputDsSolucaoEdt" name="DS_SOLUCAO" required="true"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- modal-body -->
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+          <button class="btn btn-primary" id="btnEdtObs" type="submit">Editar</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
 @endsection
 
 
@@ -151,86 +447,5 @@
 <script>
   let id = `{{$id}}`;
   pgChamados.Chamado(id);
-    /*new gridjs.Grid({
-      columns: [
-        {
-          name: 'Status',
-        },
-        {
-          name: 'Código',
-        },
-        {
-          name: 'Situação',
-        },
-        {
-          name: 'Prioridade',
-        },
-        {
-          name: 'Ds. Resumida',
-        },
-        {
-          name: 'Responsável',
-        },
-        {
-          name: 'Criador',
-        },
-        {
-          name: 'Dt. Inicio',
-        },
-        {
-          name: 'Dt. Fim',
-        },
-        {
-          name: 'Tempo Atendimento',
-        }
-        ],
-      data: [
-        ["John", "john@example.com", "(353) 01 222 3333", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Mark", "mark@gmail.com", "(01) 22 888 4444", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Eoin", "eoin@gmail.com", "0097 22 654 00033", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Afshin", "afshin@mail.com", "(353) 22 87 8356", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["John", "john@example.com", "(353) 01 222 3333", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Mark", "mark@gmail.com", "(01) 22 888 4444", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Eoin", "eoin@gmail.com", "0097 22 654 00033", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Sarah", "sarahcdd@gmail.com", "+322 876 1233", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-        ["Afshin", "afshin@mail.com", "(353) 22 87 8356", "john@example.com","John", "john@example.com", "(353) 01 222 3333", "john@example.com", "John", "john@example.com"],
-      ],
-      sort: true,
-      resizable: true,
-      pagination: {
-        limit: 10,
-      },
-      className: {
-        td: 'p-1 fs-6 fw-light',
-      }
-    }).render(document.getElementById("tab-tramite"));
-
-    new gridjs.Grid({
-      columns: [
-        { name: "Código",width:'30%', minWidth: '150px'},
-        { name: 'Nome', width:'100%', minWidth: '200px'}
-      ],
-      data: [
-        ["John", "john@example.com"],
-        ["Mark", "mark@gmail.com"],
-        ["Eoin", "eoin@gmail.com"],
-        ["Sarah", "sarahcdd@gmail.com"],
-        ["Afshin", "afshin@mail.com"],
-        ["John", "john@example.com"],
-        ["Mark", "mark@gmail.com"],
-        ["Eoin", "eoin@gmail.com"],
-        ["Sarah", "sarahcdd@gmail.com"],
-        ["Afshin", "afshin@mail.com"],
-      ],
-      width:'500px',
-      minWidth: '350px',
-      pagination: {
-        limit: 10,
-      },
-      className: {
-        td: 'p-1 fs-6 fw-light',
-      }
-    }).render(document.getElementById("tab-anexo"));*/
   </script>
 @endsection
