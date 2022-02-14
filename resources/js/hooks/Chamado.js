@@ -34,6 +34,7 @@ export const Chamado = async (id) => {
     return res.json();
   })
   .then(function(data){
+    console.log(data);
     return data
   })
   .catch(function(err){

@@ -26,4 +26,9 @@ class User extends Authenticatable
 
     protected $primaryKey = 'ID_USUARIO';
 
+    public function usuarioGrupo()
+    {
+        return $this->hasOne(OsUsuarioGrupo::class, 'ID_USUARIO', 'ID_USUARIO');
+    }
+
 }

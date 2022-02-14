@@ -27,7 +27,7 @@ class OsChamado extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class,'ID_RESPONSAVEL','ID_USUARIO');
+        return $this->belongsTo(User::class,'ID_RESPONSAVEL','ID_USUARIO')->with(['usuarioGrupo']);
     }
 
     public function criador()
